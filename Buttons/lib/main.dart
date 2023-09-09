@@ -2,6 +2,15 @@ import 'dart:io';
 
 import 'package:buttons/screens/level2.dart';
 import 'package:flutter/material.dart';
+import 'package:buttons/screens/level1.dart';
+import 'package:buttons/screens/level3.dart';
+import 'package:buttons/screens/level4.dart';
+import 'package:buttons/screens/level5.dart';
+import 'package:buttons/screens/FinalLevel.dart';
+
+
+
+
 // import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -65,7 +74,7 @@ class FirstRoute extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const ThirdRoute(),
+                        builder: (context) => FinalLevel(),
                       ),
                     );
                   },
