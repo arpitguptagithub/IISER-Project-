@@ -4,6 +4,8 @@ void main() {
   runApp(DNAPairingApp());
 }
 
+int Strands_num = 4;
+
 class DNAPairingApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -26,24 +28,69 @@ class DNAPairingPage extends StatefulWidget {
 
 class _DNAPairingPageState extends State<DNAPairingPage> {
   List<TextEditingController> row1Controllers = List.generate(
-    5,
+    2 * Strands_num,
     (index) => TextEditingController(),
   );
 
   List<TextEditingController> row2Controllers = List.generate(
-    5,
+    2 * Strands_num,
     (index) => TextEditingController(),
   );
- 
- 
- //Edit this function for checking complementary pairings of DNA
+
+  //Edit this function for checking complementary pairings of DNA
   void checkAndClearIfIncorrect() {
+    List<String> DNA_bases = ['A', 'G', 'T', 'C'];
     for (int i = 0; i < row1Controllers.length; i++) {
       final String char1 = row1Controllers[i].text.toUpperCase();
       final String char2 = row2Controllers[i].text.toUpperCase();
 
       if (char1.isNotEmpty && char2.isNotEmpty && char1 != char2) {
+        if (char1 == DNA_bases[i % 4] && char2 == DNA_bases[(i + 2) % 4]) {
+          // Do nothing if the pair is correct
+        } else if (char2 == DNA_bases[i % 4] &&
+            char1 == DNA_bases[(i + 2) % 4]) {
+          // Do nothing if the pair is correct
+        } else if (char1 == DNA_bases[i % 4] &&
+            char2 == DNA_bases[(i + 3) % 4]) {
+          // Do nothing if the pair is correct
+        } else if (char2 == DNA_bases[i % 4] &&
+            char1 == DNA_bases[(i + 3) % 4]) {
+          // Do nothing if the pair is correct
+        } else if (char1 == DNA_bases[(i + 1) % 4] &&
+            char2 == DNA_bases[(i + 2) % 4]) {
+          // Do nothing if the pair is correct
+        } else if (char2 == DNA_bases[(i + 1) % 4] &&
+            char1 == DNA_bases[(i + 2) % 4]) {
+          // Do nothing if the pair is correct
+        } else if (char1 == DNA_bases[(i + 1) % 4] &&
+            char2 == DNA_bases[(i + 3) % 4]) {
+          // Do nothing if the pair is correct
+        } else if (char2 == DNA_bases[(i + 1) % 4] &&
+            char1 == DNA_bases[(i + 3) % 4]) {
+          // Do nothing if the pair is correct
+        } else if (char1 == DNA_bases[(i + 2) % 4] &&
+            char2 == DNA_bases[(i + 3) % 4]) {
+          // Do nothing if the pair is correct
+        } else if (char2 == DNA_bases[(i + 2) % 4] &&
+            char1 == DNA_bases[(i + 3) % 4]) {
+          // Do nothing if the pair is correct
+        } else if (char1 == DNA_bases[(i + 3) % 4] &&
+            char2 == DNA_bases[(i + 1) % 4]) {
+          // Do nothing if the pair is correct
+        } else if (char2 == DNA_bases[(i + 3) % 4] &&
+            char1 == DNA_bases[(i + 1) % 4]) {
+          // Do nothing if the pair is correct
+        } else if (char1 == DNA_bases[(i + 3) % 4] &&
+            char2 == DNA_bases[(i + 2) % 4]) {
+          // Do nothing if the pair is correct
+        }
         // Clear both boxes if there's a mismatch
+        else {
+          row1Controllers[i].clear();
+          row2Controllers[i].clear();
+        }
+      } else {
+        // Clear both boxes if there's a mismatch - which will be there as joint bases can't be same - refer: google
         row1Controllers[i].clear();
         row2Controllers[i].clear();
       }
@@ -123,6 +170,3 @@ class _DNAPairingPageState extends State<DNAPairingPage> {
     );
   }
 }
-
-
- 
