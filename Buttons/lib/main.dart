@@ -74,7 +74,7 @@ class FirstRoute extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => FinalLevel(),
+                        builder: (context) => GuessTheImageApp(),
                       ),
                     );
                   },

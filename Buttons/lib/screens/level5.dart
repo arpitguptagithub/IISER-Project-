@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
 import 'dart:math';
-
-
 
 class GuessTheImageApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: Text('Guess the Image'),
-          centerTitle: true,
-        ),
         body: GuessTheImagePage(),
       ),
     );
@@ -24,20 +19,43 @@ class GuessTheImagePage extends StatefulWidget {
 }
 
 class _GuessTheImagePageState extends State<GuessTheImagePage> {
-  final List<String> wordsToGuess = ['LION', 'TIGER', 'CHEETAH', 'LEOPARD']; // Change this list as needed
-  final String correctAnswer = 'LION'; // Change this to the correct answer corresponding to the image
+  final List<String> wordsToGuess = ['LION', 'TIGER', 'CHEETAH', 'LEOPARD'];
+  final String correctAnswer = 'LION';
 
   List<String> selectedLetters = [];
   List<String> availableLetters = [];
-  List<String> filledBoxes = List.filled(4, ''); // Create an empty list with 4 elements
+  List<String> filledBoxes = List.filled(4, '');
+
+  int timerSeconds = 60; // Set your desired countdown time here
+  late Timer timer;
+  bool isTimeUp = false;
 
   @override
   void initState() {
     super.initState();
-
-    // Initialize the available letters with random letters
     availableLetters = generateRandomLetters(correctAnswer);
+    startTimer();
   }
+
+  @override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
+  }
+
+  void startTimer() {
+    timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      setState(() {
+        if (timerSeconds > 0) {
+          timerSeconds--;
+        } else {
+          timer.cancel();
+          isTimeUp = true;
+        }
+      });
+    });
+  }
+
 
   List<String> generateRandomLetters(String targetWord) {
     List<String> allLetters = targetWord.split('');
@@ -145,61 +163,77 @@ class _GuessTheImagePageState extends State<GuessTheImagePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [Colors.blue, Colors.lightBlue],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-        ),
+    return Scaffold(
+       appBar: AppBar(
+        title: Text('Guess the Image'),
+        centerTitle: true,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text(
+              'Timer: ${timerSeconds.toString().padLeft(2, '0')}',
+              style: TextStyle(fontSize: 20),
+            ),
+          ),
+        ],
       ),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // Image Here
-            Container(
-              margin: EdgeInsets.all(16.0),
-              width: 200.0,
-              height: 200.0,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                image: DecorationImage(
-                  image: AssetImage('assets/lion.jpg'), // Replace with your image asset
-                  fit: BoxFit.cover,
-                ),
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-            ),
-            SizedBox(height: 16.0),
-            // Empty boxes for guessing
-            buildSelectedBoxes(),
-            SizedBox(height: 16.0),
-            // Available letters
-            buildAvailableLetters(),
-            SizedBox(height: 16.0),
-            if (isAnswerCorrect())
-              Text(
-                'Correct Answer: $correctAnswer',
-                style: TextStyle(
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.green,
+
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.blue, Colors.lightBlue],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // Image Here
+              Container(
+                margin: EdgeInsets.all(16.0),
+                width: 200.0,
+                height: 200.0,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  image: DecorationImage(
+                    image: AssetImage('assets/lion.jpg'), // Replace with your image asset
+                    fit: BoxFit.cover,
+                  ),
+                  borderRadius: BorderRadius.circular(10.0),
                 ),
               ),
-            SizedBox(height: 16.0),
-            ElevatedButton(
-              onPressed: () {
-                // Implement logic to move to the next puzzle or action
-              },
-              child: Text(
-                'Next',
-                style: TextStyle(
-                  fontSize: 18.0,
+              SizedBox(height: 16.0),
+              // Empty boxes for guessing
+              buildSelectedBoxes(),
+              SizedBox(height: 16.0),
+              // Available letters
+              buildAvailableLetters(),
+              SizedBox(height: 16.0),
+              if (isAnswerCorrect())
+                Text(
+                  'Correct Answer: $correctAnswer',
+                  style: TextStyle(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.green,
+                  ),
+                ),
+              SizedBox(height: 16.0),
+              ElevatedButton(
+                onPressed: () {
+                  // Implement logic to move to the next puzzle or action
+                },
+                child: Text(
+                  'Next',
+                  style: TextStyle(
+                    fontSize: 18.0,
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
