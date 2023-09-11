@@ -1,3 +1,5 @@
+import 'package:buttons/main.dart';
+import 'package:buttons/screens/level3.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:math';
@@ -176,6 +178,13 @@ class _GuessTheImagePageState extends State<GuessTheImagePage> {
             ),
           ),
         ],
+        leading:  BackButton(onPressed:  (){
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => FirstRoute(),
+            ),
+          );})
       ),
 
       body: Container(
@@ -198,7 +207,7 @@ class _GuessTheImagePageState extends State<GuessTheImagePage> {
                 decoration: BoxDecoration(
                   color: Colors.white,
                   image: DecorationImage(
-                    image: AssetImage('assets/lion.jpg'), // Replace with your image asset
+                    image: AssetImage('assets/vineet.jpg'), // Replace with your image asset
                     fit: BoxFit.cover,
                   ),
                   borderRadius: BorderRadius.circular(10.0),
@@ -224,6 +233,12 @@ class _GuessTheImagePageState extends State<GuessTheImagePage> {
               ElevatedButton(
                 onPressed: () {
                   // Implement logic to move to the next puzzle or action
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => MatchingApp(),
+                      ),
+                    );
                 },
                 child: Text(
                   'Next',

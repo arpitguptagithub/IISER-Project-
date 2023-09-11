@@ -1,3 +1,4 @@
+import 'package:buttons/screens/level4.dart';
 import 'package:flutter/material.dart';
 
 class MatchingApp extends StatelessWidget {
@@ -8,6 +9,7 @@ class MatchingApp extends StatelessWidget {
         appBar: AppBar(
           title: Text('Matching Game'),
           centerTitle: true,
+          leading:  BackButton(onPressed:  (){Navigator.pop(context);})
         ),
         body: MatchingPage(),
       ),
@@ -98,6 +100,7 @@ class _MatchingPageState extends State<MatchingPage> {
                   ),
                   childWhenDragging: Container(),
                 );
+                
               }).toList(),
             ),
             // Right Column
@@ -135,6 +138,23 @@ class _MatchingPageState extends State<MatchingPage> {
                 );
               }).toList(),
             ),
+            ElevatedButton(
+                onPressed: () {
+                  // Implement logic to move to the next puzzle or action
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DNAPairingApp(),
+                      ),
+                    );
+                },
+                child: Text(
+                  'Next',
+                  style: TextStyle(
+                    fontSize: 18.0,
+                  ),
+                ),
+              ),
           ],
         ),
       ),

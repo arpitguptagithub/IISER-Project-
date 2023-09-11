@@ -16,6 +16,7 @@ class CrosswordApp extends StatelessWidget {
         appBar: AppBar(
           title: Text('Crossword Puzzle'),
           centerTitle: true,
+          leading:  BackButton(onPressed:  (){Navigator.pop(context);})
         ),
         body: SafeArea(
           child: CrosswordGrid(),

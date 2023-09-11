@@ -1,3 +1,5 @@
+import 'package:buttons/screens/level1.dart';
+import 'package:crossword/crossword.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -14,6 +16,7 @@ class DNAPairingApp extends StatelessWidget {
         appBar: AppBar(
           title: Text('DNA Pairing'),
           centerTitle: true,
+          leading:  BackButton(onPressed:  (){Navigator.pop(context);})
         ),
         body: DNAPairingPage(),
       ),
@@ -164,6 +167,23 @@ class _DNAPairingPageState extends State<DNAPairingPage> {
                 ),
               ),
             ),
+            ElevatedButton(
+                onPressed: () {
+                  // Implement logic to move to the next puzzle or action
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CrosswordApp(),
+                      ),
+                    );
+                },
+                child: Text(
+                  'Next',
+                  style: TextStyle(
+                    fontSize: 18.0,
+                  ),
+                ),
+              ),
           ],
         ),
       ),
