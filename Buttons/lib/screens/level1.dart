@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:buttons/main.dart';
 import 'package:buttons/screens/level4.dart';
+import 'package:buttons/screens/level5.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -134,7 +136,7 @@ class _CrosswordGridState extends State<CrosswordGrid> {
             Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => DNAPairingApp(),
+              builder: (context) => FirstRoute(),
             ),
           );
             })
@@ -199,6 +201,32 @@ class _CrosswordGridState extends State<CrosswordGrid> {
               fontWeight: FontWeight.bold,
             ),
           ),
+          ElevatedButton(
+                onPressed: () {
+                  // Implement logic to move to the next puzzle or action
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => GuessTheImageApp(),
+                      ),
+                    );
+                },
+                child: Text(
+                  'Next',
+                  style: TextStyle(
+                    fontSize: 18.0,
+                  ),
+                ),
+              ),
+              if (isTimeUp)
+                Text(
+                  'GAME OVER.... GO TO HOME PAGE:(',
+                  style: TextStyle(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.green,
+                  ),
+                ),
         ],
       ),
     ),

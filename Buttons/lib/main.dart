@@ -53,7 +53,7 @@ class FirstRoute extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const SecondRoute(),
+                        builder: (context) => CrosswordApp(),
                       ),
                     );
                   },
@@ -66,44 +66,44 @@ class FirstRoute extends StatelessWidget {
                   // child: const Text("Exit"),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: ElevatedButton(
-                  child: Text('Temp1'),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => GuessTheImageApp(),
-                      ),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                      fixedSize: const Size(250, 60),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      )),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: ElevatedButton(
-                  child: Text('Temp2'),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const FourthRoute(),
-                      ),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                      fixedSize: const Size(250, 60),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      )),
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.all(16.0),
+              //   child: ElevatedButton(
+              //     child: Text('Temp1'),
+              //     onPressed: () {
+              //       Navigator.push(
+              //         context,
+              //         MaterialPageRoute(
+              //           builder: (context) => CrosswordApp(),
+              //         ),
+              //       );
+              //     },
+              //     style: ElevatedButton.styleFrom(
+              //         fixedSize: const Size(250, 60),
+              //         shape: RoundedRectangleBorder(
+              //           borderRadius: BorderRadius.circular(30),
+              //         )),
+              //   ),
+              // ),
+              // Padding(
+              //   padding: const EdgeInsets.all(16.0),
+              //   child: ElevatedButton(
+              //     child: Text('Temp2'),
+              //     onPressed: () {
+              //       Navigator.push(
+              //         context,
+              //         MaterialPageRoute(
+              //           builder: (context) => const FourthRoute(),
+              //         ),
+              //       );
+              //     },
+              //     style: ElevatedButton.styleFrom(
+              //         fixedSize: const Size(250, 60),
+              //         shape: RoundedRectangleBorder(
+              //           borderRadius: BorderRadius.circular(30),
+              //         )),
+              //   ),
+              // ),
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: ElevatedButton(

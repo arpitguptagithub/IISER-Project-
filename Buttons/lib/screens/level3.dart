@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:buttons/main.dart';
 import 'package:buttons/screens/level4.dart';
 import 'package:buttons/screens/level5.dart';
 import 'package:flutter/material.dart';
@@ -92,7 +93,7 @@ class _MatchingPageState extends State<MatchingPage> {
             Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => GuessTheImageApp(),
+              builder: (context) => DNAPairingApp(),
             ),
           );})
         ),
@@ -191,7 +192,7 @@ class _MatchingPageState extends State<MatchingPage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => DNAPairingApp(),
+                        builder: (context) => FirstRoute(),
                       ),
                     );
                 },

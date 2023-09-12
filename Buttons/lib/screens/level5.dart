@@ -1,5 +1,7 @@
 import 'package:buttons/main.dart';
+import 'package:buttons/screens/level1.dart';
 import 'package:buttons/screens/level3.dart';
+import 'package:buttons/screens/level4.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:math';
@@ -182,7 +184,7 @@ class _GuessTheImagePageState extends State<GuessTheImagePage> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => FirstRoute(),
+              builder: (context) => CrosswordApp(),
             ),
           );})
       ),
@@ -236,7 +238,7 @@ class _GuessTheImagePageState extends State<GuessTheImagePage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => MatchingApp(),
+                        builder: (context) => DNAPairingApp(),
                       ),
                     );
                 },
