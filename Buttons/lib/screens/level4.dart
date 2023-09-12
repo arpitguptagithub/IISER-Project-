@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:buttons/screens/level1.dart';
+import 'package:buttons/screens/level3.dart';
 import 'package:crossword/crossword.dart';
 import 'package:flutter/material.dart';
 
@@ -13,11 +16,6 @@ class DNAPairingApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: Text('DNA Pairing'),
-          centerTitle: true,
-          leading:  BackButton(onPressed:  (){Navigator.pop(context);})
-        ),
         body: DNAPairingPage(),
       ),
     );
@@ -30,6 +28,37 @@ class DNAPairingPage extends StatefulWidget {
 }
 
 class _DNAPairingPageState extends State<DNAPairingPage> {
+
+
+  int timerSeconds = 60; // Set your desired countdown time here
+  late Timer timer;
+  bool isTimeUp = false;
+
+  @override
+  void initState() {
+    startTimer();
+  }
+
+  @override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
+  }
+
+  void startTimer() {
+    timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      setState(() {
+        if (timerSeconds > 0) {
+          timerSeconds--;
+        } else {
+          timer.cancel();
+          isTimeUp = true;
+        }
+      });
+    });
+  }
+
+
   List<TextEditingController> row1Controllers = List.generate(
     2 * Strands_num,
     (index) => TextEditingController(),
@@ -102,7 +131,29 @@ class _DNAPairingPageState extends State<DNAPairingPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Scaffold(
+      appBar: AppBar(
+          title: Text('DNA Pairing'),
+          centerTitle: true,
+          actions: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text(
+              'Timer: ${timerSeconds.toString().padLeft(2, '0')}',
+              style: TextStyle(fontSize: 20),
+              ),
+            ),
+          ],
+          leading:  BackButton(onPressed:  (){
+            Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => MatchingApp(),
+            ),
+          );
+            })
+        ),
+      body: Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [Colors.blue, Colors.lightBlue],
@@ -187,6 +238,7 @@ class _DNAPairingPageState extends State<DNAPairingPage> {
           ],
         ),
       ),
+    ),
     );
   }
 }

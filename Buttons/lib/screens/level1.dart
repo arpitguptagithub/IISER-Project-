@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:buttons/screens/level4.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,11 +16,6 @@ class CrosswordApp extends StatelessWidget {
       
       ),
       home: Scaffold(
-        appBar: AppBar(
-          title: Text('Crossword Puzzle'),
-          centerTitle: true,
-          leading:  BackButton(onPressed:  (){Navigator.pop(context);})
-        ),
         body: SafeArea(
           child: CrosswordGrid(),
         ),
@@ -32,6 +30,13 @@ class CrosswordGrid extends StatefulWidget {
 }
 
 class _CrosswordGridState extends State<CrosswordGrid> {
+
+  int timerSeconds = 60; // Set your desired countdown time here
+  late Timer timer;
+  bool isTimeUp = false;
+
+  
+
   final List<List<String>> puzzleGrid = [
     ['D', 'N', 'A', 'T', 'R', 'A', 'N', 'S', 'C', 'R', 'I', 'P', 'T', 'I', 'O', 'N'],
     ['N', 'U', 'C', 'L', 'E', 'O', 'T', 'I', 'D', 'E', 'M', 'R', 'N', 'A', 'C', 'O', 'D', 'O', 'N'],
@@ -46,10 +51,31 @@ class _CrosswordGridState extends State<CrosswordGrid> {
   @override
   void initState() {
     super.initState();
+    startTimer();
     for (var row in puzzleGrid) {
       cellSelected.add(List.generate(row.length, (index) => false));
     }
   }
+
+  @override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
+  }
+
+  void startTimer() {
+    timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      setState(() {
+        if (timerSeconds > 0) {
+          timerSeconds--;
+        } else {
+          timer.cancel();
+          isTimeUp = true;
+        }
+      });
+    });
+  }
+
 
   void selectWord(int row, int col, String direction) {
     String word = "";
@@ -90,7 +116,32 @@ class _CrosswordGridState extends State<CrosswordGrid> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return Scaffold(
+
+      appBar: AppBar(
+          title: Text('Crossword Puzzle'),
+          centerTitle: true,
+          actions: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text(
+              'Timer: ${timerSeconds.toString().padLeft(2, '0')}',
+              style: TextStyle(fontSize: 20),
+            ),
+          ),
+        ],
+          leading:  BackButton(onPressed:  (){
+            Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => DNAPairingApp(),
+            ),
+          );
+            })
+        ),
+
+
+    body: Center(
       child: Column(
         children: <Widget>[
           Container(
@@ -150,6 +201,7 @@ class _CrosswordGridState extends State<CrosswordGrid> {
           ),
         ],
       ),
+    ),
     );
   }
 }

@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:buttons/screens/level4.dart';
+import 'package:buttons/screens/level5.dart';
 import 'package:flutter/material.dart';
 
 class MatchingApp extends StatelessWidget {
@@ -6,11 +9,6 @@ class MatchingApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: Text('Matching Game'),
-          centerTitle: true,
-          leading:  BackButton(onPressed:  (){Navigator.pop(context);})
-        ),
         body: MatchingPage(),
       ),
     );
@@ -23,6 +21,34 @@ class MatchingPage extends StatefulWidget {
 }
 
 class _MatchingPageState extends State<MatchingPage> {
+
+  int timerSeconds = 60; // Set your desired countdown time here
+  late Timer timer;
+  bool isTimeUp = false;
+
+  void initState() {
+    startTimer();
+  }
+
+  @override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
+  }
+
+  void startTimer() {
+    timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      setState(() {
+        if (timerSeconds > 0) {
+          timerSeconds--;
+        } else {
+          timer.cancel();
+          isTimeUp = true;
+        }
+      });
+    });
+  }
+
   Map<String, String?> matches = {
     'A': null,
     'B': null,
@@ -49,7 +75,28 @@ class _MatchingPageState extends State<MatchingPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+      return Scaffold(
+        appBar: AppBar(
+          title: Text('Matching Game'),
+          centerTitle: true,
+          actions: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text(
+              'Timer: ${timerSeconds.toString().padLeft(2, '0')}',
+              style: TextStyle(fontSize: 20),
+            ),
+          ),
+        ],
+          leading:  BackButton(onPressed:  (){
+            Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => GuessTheImageApp(),
+            ),
+          );})
+        ),
+        body: Container(
       color: Colors.blueGrey, // Background color
       padding: EdgeInsets.all(20.0), // Padding for the whole container
       child: Center(
@@ -158,6 +205,7 @@ class _MatchingPageState extends State<MatchingPage> {
           ],
         ),
       ),
+    ),
     );
   }
 }
