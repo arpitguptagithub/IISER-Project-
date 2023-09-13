@@ -1,9 +1,9 @@
-import 'dart:async';
-
 import 'package:buttons/screens/level1.dart';
 import 'package:buttons/screens/level3.dart';
 import 'package:buttons/screens/level5.dart';
 import 'package:crossword/crossword.dart';
+
+import 'dart:async';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -29,8 +29,6 @@ class DNAPairingPage extends StatefulWidget {
 }
 
 class _DNAPairingPageState extends State<DNAPairingPage> {
-
-
   int timerSeconds = 60; // Set your desired countdown time here
   late Timer timer;
   bool isTimeUp = false;
@@ -59,7 +57,6 @@ class _DNAPairingPageState extends State<DNAPairingPage> {
     });
   }
 
-
   List<TextEditingController> row1Controllers = List.generate(
     2 * Strands_num,
     (index) => TextEditingController(),
@@ -70,55 +67,18 @@ class _DNAPairingPageState extends State<DNAPairingPage> {
     (index) => TextEditingController(),
   );
 
-  //Edit this function for checking complementary pairings of DNA
   void checkAndClearIfIncorrect() {
-    List<String> DNA_bases = ['A', 'G', 'T', 'C'];
+    Map<String, String> DNA_Bases = {'A': 'T', 'T': 'A', 'G': 'C', 'C': 'G'};
+    // List<String> DNA_bases = ['A', 'G', 'T', 'C'];
     for (int i = 0; i < row1Controllers.length; i++) {
       final String char1 = row1Controllers[i].text.toUpperCase();
       final String char2 = row2Controllers[i].text.toUpperCase();
 
       if (char1.isNotEmpty && char2.isNotEmpty && char1 != char2) {
-        if (char1 == DNA_bases[i % 4] && char2 == DNA_bases[(i + 2) % 4]) {
-          // Do nothing if the pair is correct
-        } else if (char2 == DNA_bases[i % 4] &&
-            char1 == DNA_bases[(i + 2) % 4]) {
-          // Do nothing if the pair is correct
-        } else if (char1 == DNA_bases[i % 4] &&
-            char2 == DNA_bases[(i + 3) % 4]) {
-          // Do nothing if the pair is correct
-        } else if (char2 == DNA_bases[i % 4] &&
-            char1 == DNA_bases[(i + 3) % 4]) {
-          // Do nothing if the pair is correct
-        } else if (char1 == DNA_bases[(i + 1) % 4] &&
-            char2 == DNA_bases[(i + 2) % 4]) {
-          // Do nothing if the pair is correct
-        } else if (char2 == DNA_bases[(i + 1) % 4] &&
-            char1 == DNA_bases[(i + 2) % 4]) {
-          // Do nothing if the pair is correct
-        } else if (char1 == DNA_bases[(i + 1) % 4] &&
-            char2 == DNA_bases[(i + 3) % 4]) {
-          // Do nothing if the pair is correct
-        } else if (char2 == DNA_bases[(i + 1) % 4] &&
-            char1 == DNA_bases[(i + 3) % 4]) {
-          // Do nothing if the pair is correct
-        } else if (char1 == DNA_bases[(i + 2) % 4] &&
-            char2 == DNA_bases[(i + 3) % 4]) {
-          // Do nothing if the pair is correct
-        } else if (char2 == DNA_bases[(i + 2) % 4] &&
-            char1 == DNA_bases[(i + 3) % 4]) {
-          // Do nothing if the pair is correct
-        } else if (char1 == DNA_bases[(i + 3) % 4] &&
-            char2 == DNA_bases[(i + 1) % 4]) {
-          // Do nothing if the pair is correct
-        } else if (char2 == DNA_bases[(i + 3) % 4] &&
-            char1 == DNA_bases[(i + 1) % 4]) {
-          // Do nothing if the pair is correct
-        } else if (char1 == DNA_bases[(i + 3) % 4] &&
-            char2 == DNA_bases[(i + 2) % 4]) {
-          // Do nothing if the pair is correct
-        }
-        // Clear both boxes if there's a mismatch
-        else {
+        if (DNA_Bases.containsKey(char1) && DNA_Bases[char1] == char2) {
+          // Do Nothing
+        } else {
+          // Clear both boxes if there's a mismatch - which will be there as joint bases can't be same - refer: google
           row1Controllers[i].clear();
           row2Controllers[i].clear();
         }
@@ -134,112 +94,197 @@ class _DNAPairingPageState extends State<DNAPairingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text('DNA Pairing'),
-          centerTitle: true,
-          actions: [
+        title: const Text('DNA Pairing'),
+        centerTitle: true,
+        actions: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Text(
               'Timer: ${timerSeconds.toString().padLeft(2, '0')}',
-              style: TextStyle(fontSize: 20),
-              ),
+              style: const TextStyle(fontSize: 20),
             ),
-          ],
-          leading:  BackButton(onPressed:  (){
-            Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => GuessTheImageApp(),
-            ),
-          );
-            })
-        ),
+          ),
+        ],
+        leading: BackButton(onPressed: () {
+          // Handle back button press
+          Navigator.pop(context);
+        }),
+      ),
       body: Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [Colors.blue, Colors.lightBlue],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.blue, Colors.lightBlue],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
         ),
-      ),
-      child: Center(
-        child: Column(
-          children: [
-            // First Row of Boxes
-            Row(
-              children: List.generate(
-                row1Controllers.length,
-                (index) => Container(
-                  width: 40,
-                  height: 40,
-                  margin: EdgeInsets.all(8),
-                  child: TextField(
-                    controller: row1Controllers[index],
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: Colors.black),
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            // Second Row of Boxes
-            Row(
-              children: List.generate(
-                row2Controllers.length,
-                (index) => Container(
-                  width: 40,
-                  height: 40,
-                  margin: EdgeInsets.all(8),
-                  //align this to have spiral effect can use stack to alling and give spiral effect
-                  child: TextField(
-                    controller: row2Controllers[index],
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: Colors.black),
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(height: 16.0),
-            // Check Button
-            ElevatedButton(
-              onPressed: () {
-                checkAndClearIfIncorrect(); // Check and clear if pairs are incorrect
-              },
-              child: Text(
-                'Check Pairs',
-                style: TextStyle(
-                  fontSize: 18.0,
-                ),
-              ),
-            ),
-            ElevatedButton(
-                onPressed: () {
-                  // Implement logic to move to the next puzzle or action
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => MatchingApp(),
+        child: Center(
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  // First Row of Boxes
+                  Expanded(
+                    child: Column(
+                      children: List.generate(
+                        row1Controllers.length,
+                        (index) => Container(
+                          width: 40,
+                          height: 40,
+                          margin: const EdgeInsets.all(8),
+                          child: TextField(
+                            controller: row1Controllers[index],
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(color: Colors.black),
+                            decoration: const InputDecoration(
+                              filled: true,
+                              fillColor: Colors.white,
+                            ),
+                            onChanged: (text) {
+                              // Convert the entered text to uppercase
+                              text = text.toUpperCase();
+                              row1Controllers[index].value =
+                                  row1Controllers[index].value.copyWith(
+                                        text: text,
+                                        selection: TextSelection.collapsed(
+                                            offset: text.length),
+                                      );
+                            },
+                            enableInteractiveSelection: false,
+                          ),
+                        ),
                       ),
-                    );
-                },
-                child: Text(
-                  'Next',
-                  style: TextStyle(
-                    fontSize: 18.0,
+                    ),
                   ),
-                ),
+                  // CustomPaint to draw lines between boxes in the row
+                  CustomPaint(
+                    size: Size(20, 400),
+                    painter: MyPainter(),
+                  ),
+                  // Divider(color: Colors.black),
+                  // Second Row of Boxes with Reverse after 4th element
+                  Expanded(
+                    child: Column(
+                      children: [
+                        // Rows 1 to 4
+                        ...List.generate(
+                          8,
+                          (index) => Container(
+                            width: 40,
+                            height: 40,
+                            margin: EdgeInsets.all(8),
+                            child: TextField(
+                              controller: row2Controllers[index],
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(color: Colors.black),
+                              decoration: const InputDecoration(
+                                filled: true,
+                                fillColor: Colors.white,
+                              ),
+                              onChanged: (text) {
+                                // Convert the entered text to urppercase
+                                text = text.toUpperCase();
+                                row2Controllers[index].value =
+                                    row2Controllers[index].value.copyWith(
+                                          text: text,
+                                          selection: TextSelection.collapsed(
+                                              offset: text.length),
+                                        );
+                              },
+                              enableInteractiveSelection: false,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-          ],
+              // Buttons (check pair and next)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const SizedBox(width: 16), // Add spacing between buttons
+                  ElevatedButton(
+                    onPressed: () {
+                      checkAndClearIfIncorrect(); // Checking the pairs
+                    },
+                    child: const Text(
+                      'Check Pairs',
+                      style: TextStyle(
+                        fontSize: 18.0,
+                      ),
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      // Implement logic to move to the next puzzle or action
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MatchingApp(),
+                        ),
+                      );
+                    },
+                    child: const Text(
+                      'Next',
+                      style: TextStyle(
+                        fontSize: 18.0,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
-    ),
     );
+  }
+}
+
+// For Vertical Line (See UI which you want)
+
+// class MyPainter extends CustomPainter {
+//   @override
+//   void paint(Canvas canvas, Size size) {
+//     Paint paint = Paint()
+//       ..color = Colors.black
+//       ..strokeWidth = 2.0;
+
+//     // Draw lines connecting boxes in the row
+//     canvas.drawLine(Offset(0, 0), Offset(0, size.height), paint);
+//   }
+
+//   @override
+//   bool shouldRepaint(CustomPainter oldDelegate) {
+//     return false;
+//   }
+// }
+
+class MyPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    Paint paint = Paint()
+      ..color = Colors.black
+      ..strokeWidth = 2.0; // Adjust the line thickness as needed
+
+    // Calculate the number of lines needed based on the box count in each row
+    int rowCount = 8; // You can adjust this based on your actual row count
+    // int boxCountPerRow =
+    //     2 * Strands_num; // Assuming the same box count for all rows
+    double lineHeight = size.height / (rowCount - 1);
+
+    // Draw horizontal lines connecting boxes in all rows
+    for (int i = 0; i < rowCount; i++) {
+      double y = i * lineHeight;
+      canvas.drawLine(
+          Offset(-size.width * 4.0, y), Offset(size.width * 4.0, y), paint);
+    }
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return false;
   }
 }
