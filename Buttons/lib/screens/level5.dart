@@ -206,7 +206,7 @@ class _GuessTheImagePageState extends State<GuessTheImagePage> {
         width: 40.0,
         height: 40.0,
         decoration: BoxDecoration(
-          color: Colors.blue,
+          color: Color.fromARGB(255, 243, 224, 11),
           borderRadius: BorderRadius.circular(5.0),
         ),
         child: Center(
@@ -215,7 +215,7 @@ class _GuessTheImagePageState extends State<GuessTheImagePage> {
             style: TextStyle(
               fontSize: 20.0,
               fontWeight: FontWeight.bold,
-              color: Colors.white,
+              color: Color.fromARGB(255, 0, 0, 0),
             ),
           ),
         ),
@@ -231,7 +231,7 @@ class _GuessTheImagePageState extends State<GuessTheImagePage> {
           width: 40.0,
           height: 40.0,
           decoration: BoxDecoration(
-            color: Colors.blue,
+            color: Color.fromARGB(255, 243, 100, 33),
             borderRadius: BorderRadius.circular(5.0),
           ),
           child: Center(
@@ -299,7 +299,8 @@ class _GuessTheImagePageState extends State<GuessTheImagePage> {
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [Colors.blue, Colors.lightBlue],
+            colors: [Color.fromARGB(255, 197, 205, 213),
+              Color.fromARGB(255, 178, 174, 174)],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
@@ -332,11 +333,11 @@ class _GuessTheImagePageState extends State<GuessTheImagePage> {
               SizedBox(height: 16.0),
               if (isAnswerCorrect())
                 Text(
-                  'Correct Answer:', //$widget.wordsToGuess,
+                  'Correct Answer!', //$widget.wordsToGuess,
                   style: TextStyle(
-                    fontSize: 18.0,
+                    fontSize: 40.0,
                     fontWeight: FontWeight.bold,
-                    color: Colors.green,
+                    color: const Color.fromARGB(255, 0, 131, 4),
                   ),
                 ),
               SizedBox(height: 16.0),
