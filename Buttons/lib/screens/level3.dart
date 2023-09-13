@@ -97,7 +97,14 @@ class _MatchingPageState extends State<MatchingPage> {
             );
           })),
       body: Container(
-        color: Colors.blueGrey, // Background color
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Color.fromARGB(255, 197, 205, 213),
+              Color.fromARGB(255, 178, 174, 174)],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ), // Background color
         padding: EdgeInsets.all(20.0), // Padding for the whole container
         child: Center(
           child: Row(
@@ -207,6 +214,24 @@ class _MatchingPageState extends State<MatchingPage> {
                     fontSize: 18.0,
                   ),
                 ),
+              ),
+              if (isTimeUp)
+              AlertDialog(
+              title: Text('TIME UP....'),
+              content: Text('GO TO THE HOME PAGE AND START AGAIN....'),
+              actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => FirstRoute(),
+                    ),
+                  ); // Close the dialog
+                },
+                child: Text('OK'),
+              ),
+              ],
               ),
             ],
           ),
