@@ -1,7 +1,9 @@
+import 'package:buttons/main.dart';
 import 'package:buttons/screens/level1.dart';
 import 'package:buttons/screens/level3.dart';
 import 'package:buttons/screens/level5.dart';
 import 'package:crossword/crossword.dart';
+import 'package:lottie/lottie.dart';
 
 import 'dart:async';
 import 'package:flutter/material.dart';
@@ -108,131 +110,164 @@ class _DNAPairingPageState extends State<DNAPairingPage> {
         ],
         leading: BackButton(onPressed: () {
           // Handle back button press
-          Navigator.pop(context);
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => GuessTheImageApp(),
+              ),
+            );
         }),
       ),
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Colors.blue, Colors.lightBlue],
+            colors: [Color.fromARGB(255, 197, 205, 213),
+              Color.fromARGB(255, 178, 174, 174)],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
         ),
         child: Center(
-          child: Column(
+          child: ListView(
+            scrollDirection: Axis.vertical,
             children: [
-              Row(
+              Column(
                 children: [
-                  // First Row of Boxes
-                  Expanded(
-                    child: Column(
-                      children: List.generate(
-                        row1Controllers.length,
-                        (index) => Container(
-                          width: 40,
-                          height: 40,
-                          margin: const EdgeInsets.all(8),
-                          child: TextField(
-                            controller: row1Controllers[index],
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(color: Colors.black),
-                            decoration: const InputDecoration(
-                              filled: true,
-                              fillColor: Colors.white,
-                            ),
-                            onChanged: (text) {
-                              // Convert the entered text to uppercase
-                              text = text.toUpperCase();
-                              row1Controllers[index].value =
-                                  row1Controllers[index].value.copyWith(
-                                        text: text,
-                                        selection: TextSelection.collapsed(
-                                            offset: text.length),
-                                      );
-                            },
-                            enableInteractiveSelection: false,
-                          ),
-                        ),
+                  Lottie.asset('assets/3danimations/animation_lmi4qgx8.json'),
+                      SizedBox(
+                        height: 20,
                       ),
-                    ),
-                  ),
-                  // CustomPaint to draw lines between boxes in the row
-                  CustomPaint(
-                    size: Size(20, 400),
-                    painter: MyPainter(),
-                  ),
-                  // Divider(color: Colors.black),
-                  // Second Row of Boxes with Reverse after 4th element
-                  Expanded(
-                    child: Column(
-                      children: [
-                        // Rows 1 to 4
-                        ...List.generate(
-                          8,
-                          (index) => Container(
-                            width: 40,
-                            height: 40,
-                            margin: EdgeInsets.all(8),
-                            child: TextField(
-                              controller: row2Controllers[index],
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(color: Colors.black),
-                              decoration: const InputDecoration(
-                                filled: true,
-                                fillColor: Colors.white,
+                  Row(
+                    children: [
+                      // First Row of Boxes
+                      Expanded(
+                        child: Column(
+                          children: List.generate(
+                            row1Controllers.length,
+                            (index) => Container(
+                              width: 40,
+                              height: 40,
+                              margin: const EdgeInsets.all(8),
+                              child: TextField(
+                                controller: row1Controllers[index],
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(color: Colors.black),
+                                decoration: const InputDecoration(
+                                  filled: true,
+                                  fillColor: Colors.white,
+                                ),
+                                onChanged: (text) {
+                                  // Convert the entered text to uppercase
+                                  text = text.toUpperCase();
+                                  row1Controllers[index].value =
+                                      row1Controllers[index].value.copyWith(
+                                            text: text,
+                                            selection: TextSelection.collapsed(
+                                                offset: text.length),
+                                          );
+                                },
+                                enableInteractiveSelection: false,
                               ),
-                              onChanged: (text) {
-                                // Convert the entered text to urppercase
-                                text = text.toUpperCase();
-                                row2Controllers[index].value =
-                                    row2Controllers[index].value.copyWith(
-                                          text: text,
-                                          selection: TextSelection.collapsed(
-                                              offset: text.length),
-                                        );
-                              },
-                              enableInteractiveSelection: false,
                             ),
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              // Buttons (check pair and next)
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const SizedBox(width: 16), // Add spacing between buttons
-                  ElevatedButton(
-                    onPressed: () {
-                      checkAndClearIfIncorrect(); // Checking the pairs
-                    },
-                    child: const Text(
-                      'Check Pairs',
-                      style: TextStyle(
-                        fontSize: 18.0,
                       ),
-                    ),
+                      // CustomPaint to draw lines between boxes in the row
+                      CustomPaint(
+                        size: Size(20, 400),
+                        painter: MyPainter(),
+                      ),
+                      // Divider(color: Colors.black),
+                      // Second Row of Boxes with Reverse after 4th element
+                      Expanded(
+                        child: Column(
+                          children: [
+                            // Rows 1 to 4
+                            ...List.generate(
+                              8,
+                              (index) => Container(
+                                width: 40,
+                                height: 40,
+                                margin: EdgeInsets.all(8),
+                                child: TextField(
+                                  controller: row2Controllers[index],
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(color: Colors.black),
+                                  decoration: const InputDecoration(
+                                    filled: true,
+                                    fillColor: Colors.white,
+                                  ),
+                                  onChanged: (text) {
+                                    // Convert the entered text to urppercase
+                                    text = text.toUpperCase();
+                                    row2Controllers[index].value =
+                                        row2Controllers[index].value.copyWith(
+                                              text: text,
+                                              selection: TextSelection.collapsed(
+                                                  offset: text.length),
+                                            );
+                                  },
+                                  enableInteractiveSelection: false,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
-                  ElevatedButton(
+                  // Buttons (check pair and next)
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const SizedBox(width: 16), // Add spacing between buttons
+                      ElevatedButton(
+                        onPressed: () {
+                          checkAndClearIfIncorrect(); // Checking the pairs
+                        },
+                        child: const Text(
+                          'Check Pairs',
+                          style: TextStyle(
+                            fontSize: 18.0,
+                          ),
+                        ),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          // Implement logic to move to the next puzzle or action
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => MatchingApp(),
+                            ),
+                          );
+                        },
+                        child: const Text(
+                          'Next',
+                          style: TextStyle(
+                            fontSize: 18.0,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  if (isTimeUp)
+                  AlertDialog(
+                  title: Text('TIME UP....'),
+                  content: Text('GO TO THE HOME PAGE AND START AGAIN....'),
+                  actions: <Widget>[
+                  TextButton(
                     onPressed: () {
-                      // Implement logic to move to the next puzzle or action
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => MatchingApp(),
+                          builder: (context) => FirstRoute(),
                         ),
-                      );
+                      ); // Close the dialog
                     },
-                    child: const Text(
-                      'Next',
-                      style: TextStyle(
-                        fontSize: 18.0,
-                      ),
-                    ),
+                    child: Text('OK'),
+                  ),
+                  ],
                   ),
                 ],
               ),
