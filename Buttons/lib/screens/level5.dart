@@ -10,25 +10,128 @@ class GuessTheImageApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        body: GuessTheImagePage(),
-      ),
+      home: MyHomePage(),
     );
   }
 }
 
+class MyHomePage extends StatefulWidget {
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  final int repeatCount = 4; // Set the number of repetitions
+ 
+
+  int currentPage = 0;
+  late PageController pageController;
+
+  @override
+  void initState() {
+    super.initState();
+    pageController = PageController();
+  }
+
+  @override
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
+  }
+
+  void showCongratulationsDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Congratulations!'),
+          content: Text('You completed the first level of the game.'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void nextPage() {
+    setState(() {
+      currentPage++;
+      if (currentPage == repeatCount) {
+        // If we reached the desired number of repetitions, show the dialog
+        showCongratulationsDialog();
+      } else {
+        // Otherwise, go to the next page
+        pageController.nextPage(duration: Duration(milliseconds: 500), curve: Curves.easeInOut);
+      }
+    });
+  }
+  @override
+  Widget build(BuildContext context) {
+    final List<String> assetPaths = [
+      'assets/images/lion.jpg',
+      'assets/images/tiger.jpg',
+      'assets/images/cheetah.jpg',
+      'assets/images/leopard.jpg',
+    ];
+
+    final List<String> wordsToGuesses = ['LION', 'TIGER', 'CHEETAH', 'LEOPARD'];
+
+    
+    return MaterialApp(
+      home: Scaffold(
+         body: PageView.builder(
+        controller: pageController,
+        itemCount: repeatCount * assetPaths.length,
+        itemBuilder: (context, index) {
+          final assetIndex = index % assetPaths.length;
+          final assetPath = assetPaths[assetIndex];
+          final wordsToGuess = wordsToGuesses[assetIndex];
+
+          return GuessTheImagePage(
+            wordsToGuess: wordsToGuess,
+            assetPath: assetPath,
+            isLastPage: index == (repeatCount * assetPaths.length),
+            onNext: nextPage,// update to the next level 
+          );
+        },
+      ),
+      ),
+    );
+
+
+    
+  }
+}
+
 class GuessTheImagePage extends StatefulWidget {
+  final String assetPath;
+    final bool isLastPage;
+    final String wordsToGuess;
+    final VoidCallback onNext;
+
+
+   GuessTheImagePage({
+    required this.assetPath,
+    required this.isLastPage,
+    required this.wordsToGuess,
+    required this.onNext,
+    });
   @override
   _GuessTheImagePageState createState() => _GuessTheImagePageState();
 }
 
 class _GuessTheImagePageState extends State<GuessTheImagePage> {
-  final List<String> wordsToGuess = ['LION', 'TIGER', 'CHEETAH', 'LEOPARD'];
-  final String correctAnswer = 'LION';
-
+  
+  late final String length;
   List<String> selectedLetters = [];
   List<String> availableLetters = [];
-  List<String> filledBoxes = List.filled(4, '');
+    List<String> filledBoxes =[];
 
   int timerSeconds = 60; // Set your desired countdown time here
   late Timer timer;
@@ -36,9 +139,13 @@ class _GuessTheImagePageState extends State<GuessTheImagePage> {
 
   @override
   void initState() {
+    length = widget.wordsToGuess.length.toString();
+    filledBoxes= List.filled(int.parse(length), '');
+ // Move the initialization here
     super.initState();
-    availableLetters = generateRandomLetters(correctAnswer);
+    availableLetters = generateRandomLetters(widget.wordsToGuess);
     startTimer();
+    
   }
 
   @override
@@ -86,8 +193,8 @@ class _GuessTheImagePageState extends State<GuessTheImagePage> {
         setState(() {
           if (filledBoxes.contains('')) {
             int emptyBoxIndex = filledBoxes.indexOf('');
-            if (emptyBoxIndex < correctAnswer.length &&
-                letter == correctAnswer[emptyBoxIndex]) {
+            if (emptyBoxIndex < widget.wordsToGuess.length &&
+                letter == widget.wordsToGuess[emptyBoxIndex]) {
               filledBoxes[emptyBoxIndex] = letter;
               selectedLetters.add(letter);
               availableLetters.remove(letter);
@@ -162,7 +269,7 @@ class _GuessTheImagePageState extends State<GuessTheImagePage> {
   }
 
   bool isAnswerCorrect() {
-    return filledBoxes.join('') == correctAnswer;
+    return filledBoxes.join('') == widget.wordsToGuess;
   }
 
   @override
@@ -225,7 +332,7 @@ class _GuessTheImagePageState extends State<GuessTheImagePage> {
               SizedBox(height: 16.0),
               if (isAnswerCorrect())
                 Text(
-                  'Correct Answer: $correctAnswer',
+                  'Correct Answer:', //$widget.wordsToGuess,
                   style: TextStyle(
                     fontSize: 18.0,
                     fontWeight: FontWeight.bold,
@@ -249,6 +356,24 @@ class _GuessTheImagePageState extends State<GuessTheImagePage> {
                     fontSize: 18.0,
                   ),
                 ),
+              ),
+              if (isTimeUp)
+              AlertDialog(
+              title: Text('TIME UP....'),
+              content: Text('GO TO THE HOME PAGE AND START AGAIN....'),
+              actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => FirstRoute(),
+                    ),
+                  ); // Close the dialog
+                },
+                child: Text('OK'),
+              ),
+              ],
               ),
             ],
           ),
