@@ -60,7 +60,6 @@ class _GuessTheImagePageState extends State<GuessTheImagePage> {
     });
   }
 
-
   List<String> generateRandomLetters(String targetWord) {
     List<String> allLetters = targetWord.split('');
     List<String> randomLetters = [];
@@ -74,7 +73,8 @@ class _GuessTheImagePageState extends State<GuessTheImagePage> {
     // Add extra random letters to fill the available letters box
     int lettersToAdd = max(6 - targetWord.length, 0);
     for (int i = 0; i < lettersToAdd; i++) {
-      randomLetters.add(String.fromCharCode(Random().nextInt(26) + 'A'.codeUnitAt(0)));
+      randomLetters
+          .add(String.fromCharCode(Random().nextInt(26) + 'A'.codeUnitAt(0)));
     }
 
     return randomLetters;
@@ -168,27 +168,27 @@ class _GuessTheImagePageState extends State<GuessTheImagePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       appBar: AppBar(
-        title: Text('Guess the Image'),
-        centerTitle: true,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Text(
-              'Timer: ${timerSeconds.toString().padLeft(2, '0')}',
-              style: TextStyle(fontSize: 20),
+      appBar: AppBar(
+          title: Text('Guess the Image'),
+          centerTitle: true,
+          actions: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Text(
+                textAlign: TextAlign.center,
+                'Timer: ${timerSeconds.toString().padLeft(2, '0')}',
+                style: TextStyle(fontSize: 20),
+              ),
             ),
-          ),
-        ],
-        leading:  BackButton(onPressed:  (){
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => CrosswordApp(),
-            ),
-          );})
-      ),
-
+          ],
+          leading: BackButton(onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => CrosswordApp(),
+              ),
+            );
+          })),
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -209,7 +209,8 @@ class _GuessTheImagePageState extends State<GuessTheImagePage> {
                 decoration: BoxDecoration(
                   color: Colors.white,
                   image: DecorationImage(
-                    image: AssetImage('assets/vineet.jpg'), // Replace with your image asset
+                    image: AssetImage(
+                        'assets/vineet.jpg'), // Replace with your image asset
                     fit: BoxFit.cover,
                   ),
                   borderRadius: BorderRadius.circular(10.0),
@@ -236,11 +237,11 @@ class _GuessTheImagePageState extends State<GuessTheImagePage> {
                 onPressed: () {
                   // Implement logic to move to the next puzzle or action
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => DNAPairingApp(),
-                      ),
-                    );
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DNAPairingApp(),
+                    ),
+                  );
                 },
                 child: Text(
                   'Next',

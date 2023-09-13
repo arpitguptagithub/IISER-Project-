@@ -100,6 +100,7 @@ class _DNAPairingPageState extends State<DNAPairingPage> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Text(
+              textAlign: TextAlign.center,
               'Timer: ${timerSeconds.toString().padLeft(2, '0')}',
               style: const TextStyle(fontSize: 20),
             ),

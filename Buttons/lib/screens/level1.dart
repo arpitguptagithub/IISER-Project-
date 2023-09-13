@@ -15,7 +15,6 @@ class CrosswordApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
         primaryColor: Colors.blue,
-      
       ),
       home: Scaffold(
         body: SafeArea(
@@ -32,17 +31,70 @@ class CrosswordGrid extends StatefulWidget {
 }
 
 class _CrosswordGridState extends State<CrosswordGrid> {
-
   int timerSeconds = 60; // Set your desired countdown time here
   late Timer timer;
   bool isTimeUp = false;
 
-  
-
   final List<List<String>> puzzleGrid = [
-    ['D', 'N', 'A', 'T', 'R', 'A', 'N', 'S', 'C', 'R', 'I', 'P', 'T', 'I', 'O', 'N'],
-    ['N', 'U', 'C', 'L', 'E', 'O', 'T', 'I', 'D', 'E', 'M', 'R', 'N', 'A', 'C', 'O', 'D', 'O', 'N'],
-    ['A', 'M', 'I', 'N', 'O', 'A', 'C', 'I', 'D', 'R', 'I', 'B', 'O', 'S', 'O', 'M', 'E', 'O'],
+    [
+      'D',
+      'N',
+      'A',
+      'T',
+      'R',
+      'A',
+      'N',
+      'S',
+      'C',
+      'R',
+      'I',
+      'P',
+      'T',
+      'I',
+      'O',
+      'N'
+    ],
+    [
+      'N',
+      'U',
+      'C',
+      'L',
+      'E',
+      'O',
+      'T',
+      'I',
+      'D',
+      'E',
+      'M',
+      'R',
+      'N',
+      'A',
+      'C',
+      'O',
+      'D',
+      'O',
+      'N'
+    ],
+    [
+      'A',
+      'M',
+      'I',
+      'N',
+      'O',
+      'A',
+      'C',
+      'I',
+      'D',
+      'R',
+      'I',
+      'B',
+      'O',
+      'S',
+      'O',
+      'M',
+      'E',
+      'O'
+    ],
     // Add more rows as needed
   ];
 
@@ -77,7 +129,6 @@ class _CrosswordGridState extends State<CrosswordGrid> {
       });
     });
   }
-
 
   void selectWord(int row, int col, String direction) {
     String word = "";
@@ -119,117 +170,118 @@ class _CrosswordGridState extends State<CrosswordGrid> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       appBar: AppBar(
           title: Text('Crossword Puzzle'),
           centerTitle: true,
           actions: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Text(
-              'Timer: ${timerSeconds.toString().padLeft(2, '0')}',
-              style: TextStyle(fontSize: 20),
-            ),
-          ),
-        ],
-          leading:  BackButton(onPressed:  (){
-            Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => FirstRoute(),
-            ),
-          );
-            })
-        ),
-
-
-    body: Center(
-      child: Column(
-        children: <Widget>[
-          Container(
-            padding: EdgeInsets.all(20.0),
-            child: GridView.builder(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: puzzleGrid.length * puzzleGrid[0].length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: puzzleGrid[0].length,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Text(
+                textAlign: TextAlign.center,
+                'Timer: ${timerSeconds.toString().padLeft(2, '0')}',
+                style: TextStyle(fontSize: 20),
               ),
-              itemBuilder: (context, index) {
-                final row = index ~/ puzzleGrid[0].length;
-                final col = index % puzzleGrid[0].length;
+            ),
+          ],
+          leading: BackButton(onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => FirstRoute(),
+              ),
+            );
+          })),
+      body: Center(
+        child: Column(
+          children: <Widget>[
+            Container(
+              padding: EdgeInsets.all(20.0),
+              child: GridView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: puzzleGrid.length * puzzleGrid[0].length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: puzzleGrid[0].length,
+                ),
+                itemBuilder: (context, index) {
+                  final row = index ~/ puzzleGrid[0].length;
+                  final col = index % puzzleGrid[0].length;
 
-                return GestureDetector(
-                  onTap: () {
-                    resetSelection();
-                    selectWord(row, col, "horizontal"); // Change to "vertical" for vertical selection
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.blue),
-                      color: cellSelected[row][col] ? Colors.red : Colors.white,
-                      borderRadius: BorderRadius.circular(5.0),
-                    ),
-                    child: Center(
-                      child: Text(
-                        puzzleGrid[row][col],
-                        style: TextStyle(
-                          fontSize: 20.0,
-                          color: cellSelected[row][col] ? Colors.white : Colors.black,
-                          fontWeight: FontWeight.bold,
+                  return GestureDetector(
+                    onTap: () {
+                      resetSelection();
+                      selectWord(row, col,
+                          "horizontal"); // Change to "vertical" for vertical selection
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.blue),
+                        color:
+                            cellSelected[row][col] ? Colors.red : Colors.white,
+                        borderRadius: BorderRadius.circular(5.0),
+                      ),
+                      child: Center(
+                        child: Text(
+                          puzzleGrid[row][col],
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            color: cellSelected[row][col]
+                                ? Colors.white
+                                : Colors.black,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
+                  );
+                },
+              ),
+            ),
+            SizedBox(height: 20.0),
+            Text(
+              'Selected Word: $selectedWord',
+              style: TextStyle(
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 10.0),
+            Text(
+              'Correct Words Found: $count',
+              style: TextStyle(
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                // Implement logic to move to the next puzzle or action
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => GuessTheImageApp(),
                   ),
                 );
               },
-            ),
-          ),
-          SizedBox(height: 20.0),
-          Text(
-            'Selected Word: $selectedWord',
-            style: TextStyle(
-              fontSize: 18.0,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          SizedBox(height: 10.0),
-          Text(
-            'Correct Words Found: $count',
-            style: TextStyle(
-              fontSize: 18.0,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          ElevatedButton(
-                onPressed: () {
-                  // Implement logic to move to the next puzzle or action
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => GuessTheImageApp(),
-                      ),
-                    );
-                },
-                child: Text(
-                  'Next',
-                  style: TextStyle(
-                    fontSize: 18.0,
-                  ),
+              child: Text(
+                'Next',
+                style: TextStyle(
+                  fontSize: 18.0,
                 ),
               ),
-              if (isTimeUp)
-                Text(
-                  'GAME OVER.... GO TO HOME PAGE:(',
-                  style: TextStyle(
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.green,
-                  ),
+            ),
+            if (isTimeUp)
+              Text(
+                'GAME OVER.... GO TO HOME PAGE:(',
+                style: TextStyle(
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.green,
                 ),
-        ],
+              ),
+          ],
+        ),
       ),
-    ),
     );
   }
 }
