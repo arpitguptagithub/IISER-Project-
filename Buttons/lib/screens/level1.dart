@@ -1,3 +1,7 @@
+import 'dart:async';
+
+import 'package:buttons/main.dart';
+import 'package:buttons/screens/level5.dart';
 import 'package:flutter/material.dart';
 
 class CrosswordApp extends StatelessWidget {
@@ -8,13 +12,6 @@ class CrosswordApp extends StatelessWidget {
         primaryColor: Colors.blue,
       ),
       home: Scaffold(
-        appBar: AppBar(
-          title: Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Text('Crossword Puzzle'),
-          ),
-          centerTitle: true,
-        ),
         body: SafeArea(
           child: CrosswordGrid(),
         ),
@@ -29,6 +26,11 @@ class CrosswordGrid extends StatefulWidget {
 }
 
 class _CrosswordGridState extends State<CrosswordGrid> {
+
+  int timerSeconds = 300; // Set your desired countdown time here
+  late Timer timer;
+  bool isTimeUp = false;
+
   final List<List<String>> puzzleGrid = [
     ['C', 'A', 'R', 'T', 'U', 'L', 'C', 'I', 'R', 'P', 'Y', 'N', 'E'],
     ['O', 'M', 'T', 'A', 'C', 'S', 'O', 'T', 'O', 'D', 'N', 'A', 'K'],
@@ -46,7 +48,34 @@ class _CrosswordGridState extends State<CrosswordGrid> {
     ['R', 'T', 'R', 'A', 'N', 'S', 'L', 'A', 'T', 'I', 'O', 'N', 'O']
   ];
 
+// TRANSCRIPTION
+// MRNA
+// NUCLEOTIDE
+// RIBOSOME
+// TRNA
+// TEMPLATE
+// TRANSLATION
+// CODON
+// COMPLEMENT
+// AMINO
+// RRNA
+// CODING
   List<List<bool>> cellSelected = [];
+  Map<String, bool> checkWord = {
+    "TRANSCRIPTION": false,
+    "MRNA": false,
+    "NUCLEOTIDE": false,
+    "RIBOSOME": false,
+    "TRNA": false,
+    "TEMPLATE": false,
+    "TRANSLATION": false,
+    "CODON": false,
+    "COMPLEMENT": false,
+    "AMINO": false,
+    "RRNA": false,
+    "CODING": false,
+    "DNA": false
+  };
   int count = 0;
   String selectedWord = "";
   int prev_row = -1;
@@ -54,10 +83,29 @@ class _CrosswordGridState extends State<CrosswordGrid> {
 
   @override
   void initState() {
+    startTimer();
     super.initState();
     for (var row in puzzleGrid) {
       cellSelected.add(List.generate(row.length, (index) => false));
     }
+  }
+
+  void dispose() {
+    timer.cancel();
+    super.dispose();
+  }
+
+  void startTimer() {
+    timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      setState(() {
+        if (timerSeconds > 0) {
+          timerSeconds--;
+        } else {
+          timer.cancel();
+          isTimeUp = true;
+        }
+      });
+    });
   }
 
   void selectWord(int row, int col, String direction) {
@@ -85,31 +133,48 @@ class _CrosswordGridState extends State<CrosswordGrid> {
   }
 
   bool checkForWordMatch() {
-    if (selectedWord == "DNA") {
+    if (selectedWord == "DNA" && checkWord["TRANSCRIPTION"] == false) {
+      checkWord["DNA"] = true;
       return true;
-    } else if (selectedWord == "TRANSCRIPTION") {
+    } else if (selectedWord == "TRANSCRIPTION" &&
+        checkWord["TRANSCRIPTION"] == false) {
+      checkWord["TRANSCRIPTION"] = true;
       return true;
-    } else if (selectedWord == "MRNA") {
+    } else if (selectedWord == "MRNA" && checkWord["MRNA"] == false) {
+      checkWord["MRNA"] = true;
       return true;
-    } else if (selectedWord == "NUCLEOTIDE") {
+    } else if (selectedWord == "NUCLEOTIDE" &&
+        checkWord["NUCLEOTIDE"] == false) {
+      checkWord["NUCLEOTIDE"] = true;
       return true;
-    } else if (selectedWord == "RIBOSOME") {
+    } else if (selectedWord == "RIBOSOME" && checkWord["RIBOSOME"] == false) {
+      checkWord["RIBOSOME"] = true;
       return true;
-    } else if (selectedWord == "TRNA") {
+    } else if (selectedWord == "TRNA" && checkWord["TRNA"] == false) {
+      checkWord["TRNA"] = true;
       return true;
-    } else if (selectedWord == "TEMPLATE") {
+    } else if (selectedWord == "TEMPLATE" && checkWord["TEMPLATE"] == false) {
+      checkWord["TEMPLATE"] = true;
       return true;
-    } else if (selectedWord == "TRANSLATION") {
+    } else if (selectedWord == "TRANSLATION" &&
+        checkWord["TRANSLATION"] == false) {
+      checkWord["TRANSLATION"] = true;
       return true;
-    } else if (selectedWord == "CODON") {
+    } else if (selectedWord == "CODON" && checkWord["CODON"] == false) {
+      checkWord["CODON"] = true;
       return true;
-    } else if (selectedWord == "COMPLEMENT") {
+    } else if (selectedWord == "COMPLEMENT" &&
+        checkWord["COMPLEMENT"] == false) {
+      checkWord["COMPLEMENT"] = true;
       return true;
-    } else if (selectedWord == "AMINO") {
+    } else if (selectedWord == "AMINO" && checkWord["AMINO"] == false) {
+      checkWord["AMINO"] = true;
       return true;
-    } else if (selectedWord == "RRNA") {
+    } else if (selectedWord == "RRNA" && checkWord["RRNA"] == false) {
+      checkWord["RRNA"] = true;
       return true;
-    } else if (selectedWord == "CODING") {
+    } else if (selectedWord == "CODING" && checkWord["CODING"] == false) {
+      checkWord["CODING"] = true;
       return true;
     } else {
       return false;
@@ -127,7 +192,34 @@ class _CrosswordGridState extends State<CrosswordGrid> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return Scaffold(
+      appBar: AppBar(
+          title: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Text('Crossword Puzzle'),
+          ),
+          centerTitle: true,
+          actions: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text(
+              textAlign: TextAlign.center,
+              'Timer: ${timerSeconds.toString().padLeft(2, '0')}',
+              style: const TextStyle(fontSize: 20),
+            ),
+          ),
+        ],
+          leading: BackButton(onPressed: () {
+          // Handle back button press
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => FirstRoute(),
+              ),
+            );
+        }),
+      ),
+    body: Center(
       child: ListView(
         scrollDirection: Axis.vertical,
         children: <Widget>[
@@ -146,7 +238,6 @@ class _CrosswordGridState extends State<CrosswordGrid> {
 
                 return GestureDetector(
                   onTap: () {
-                    resetSelection();
                     if (prev_row != -1 && prev_column != -1) {
                       if (row == prev_row) {
                         selectWord(row, col, "horizontal");
@@ -155,10 +246,12 @@ class _CrosswordGridState extends State<CrosswordGrid> {
                       } else {
                         prev_column = -1;
                         prev_row = -1;
+                        resetSelection();
                       }
                     } else {
                       prev_column = col;
                       prev_row = row;
+                      resetSelection();
                     }
                     //selectWord(row, col, "horizontal"); // Change to "vertical" for vertical selection
                   },
@@ -251,12 +344,52 @@ class _CrosswordGridState extends State<CrosswordGrid> {
                     fontSize: 18.0,
                     fontWeight: FontWeight.bold,
                   ),
-                )
+                ),
               ],
             ),
-          )
+          ),
+          if (isTimeUp)
+              AlertDialog(
+                alignment: Alignment.center,
+              title: Text('TIME UP....'),
+              content: Text('GO TO THE HOME PAGE AND START AGAIN....'),
+              actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => FirstRoute(),
+                    ),
+                  ); // Close the dialog
+                },
+                child: Text('OK'),
+              ),
+              ],
+              ),
+          ElevatedButton(
+                        onPressed: () {
+                          if(count==3) {
+                          // Implement logic to move to the next puzzle or action
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => GuessTheImageApp(),
+                            ),
+                          );
+                          }
+                        },
+                        child: const Text(
+                          'Next',
+                          style: TextStyle(
+                            fontSize: 18.0,
+                          ),
+                        ),
+                      ),
+                      
         ],
       ),
+    ),
     );
   }
 }
