@@ -5,7 +5,6 @@ import 'package:buttons/screens/FinalLevel.dart';
 import 'package:buttons/screens/level4.dart';
 import 'package:flutter/material.dart';
 
-
 // void main() {
 //   runApp(const MaterialApp(
 //     debugShowCheckedModeBanner: false,
@@ -13,7 +12,6 @@ import 'package:flutter/material.dart';
 //     home: MaterialApp(),
 //   ));
 // }
-
 
 class MatchingApp extends StatelessWidget {
   @override
@@ -109,8 +107,10 @@ class _MatchingPageState extends State<MatchingPage> {
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color.fromARGB(255, 197, 205, 213),
-              Color.fromARGB(255, 178, 174, 174)],
+            colors: [
+              Color.fromARGB(255, 197, 205, 213),
+              Color.fromARGB(255, 178, 174, 174)
+            ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
@@ -208,41 +208,42 @@ class _MatchingPageState extends State<MatchingPage> {
                   );
                 }).toList(),
               ),
-              ElevatedButton(
-                onPressed: () {
-                  // Implement logic to move to the next puzzle or action
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => FinalLevel(),
+              if (!isTimeUp)
+                ElevatedButton(
+                  onPressed: () {
+                    // Implement logic to move to the next puzzle or action
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => FinalLevel(),
+                      ),
+                    );
+                  },
+                  child: Text(
+                    'Next',
+                    style: TextStyle(
+                      fontSize: 18.0,
                     ),
-                  );
-                },
-                child: Text(
-                  'Next',
-                  style: TextStyle(
-                    fontSize: 18.0,
                   ),
                 ),
-              ),
               if (isTimeUp)
-              AlertDialog(
-              title: Text('TIME UP....'),
-              content: Text('GO TO THE HOME PAGE AND START AGAIN....'),
-              actions: <Widget>[
-              TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => FirstRoute(),
+                AlertDialog(
+                  title: Text('TIME UP....'),
+                  content: Text('GO TO THE HOME PAGE AND START AGAIN....'),
+                  actions: <Widget>[
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => FirstRoute(),
+                          ),
+                        ); // Close the dialog
+                      },
+                      child: Text('OK'),
                     ),
-                  ); // Close the dialog
-                },
-                child: Text('OK'),
-              ),
-              ],
-              ),
+                  ],
+                ),
             ],
           ),
         ),

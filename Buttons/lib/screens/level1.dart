@@ -26,7 +26,6 @@ class CrosswordGrid extends StatefulWidget {
 }
 
 class _CrosswordGridState extends State<CrosswordGrid> {
-
   int timerSeconds = 300; // Set your desired countdown time here
   late Timer timer;
   bool isTimeUp = false;
@@ -194,12 +193,12 @@ class _CrosswordGridState extends State<CrosswordGrid> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Text('Crossword Puzzle'),
-          ),
-          centerTitle: true,
-          actions: [
+        title: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Text('Crossword Puzzle'),
+        ),
+        centerTitle: true,
+        actions: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Text(
@@ -209,187 +208,188 @@ class _CrosswordGridState extends State<CrosswordGrid> {
             ),
           ),
         ],
-          leading: BackButton(onPressed: () {
+        leading: BackButton(onPressed: () {
           // Handle back button press
           Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => FirstRoute(),
-              ),
-            );
+            context,
+            MaterialPageRoute(
+              builder: (context) => FirstRoute(),
+            ),
+          );
         }),
       ),
-    body: Center(
-      child: ListView(
-        scrollDirection: Axis.vertical,
-        children: <Widget>[
-          Container(
-            padding: EdgeInsets.all(20.0),
-            child: GridView.builder(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: puzzleGrid.length * puzzleGrid[0].length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: puzzleGrid[0].length,
-              ),
-              itemBuilder: (context, index) {
-                final row = index ~/ puzzleGrid[0].length;
-                final col = index % puzzleGrid[0].length;
+      body: Center(
+        child: ListView(
+          scrollDirection: Axis.vertical,
+          children: <Widget>[
+            Container(
+              padding: EdgeInsets.all(20.0),
+              child: GridView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: puzzleGrid.length * puzzleGrid[0].length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: puzzleGrid[0].length,
+                ),
+                itemBuilder: (context, index) {
+                  final row = index ~/ puzzleGrid[0].length;
+                  final col = index % puzzleGrid[0].length;
 
-                return GestureDetector(
-                  onTap: () {
-                    if (prev_row != -1 && prev_column != -1) {
-                      if (row == prev_row) {
-                        selectWord(row, col, "horizontal");
-                      } else if (col == prev_column) {
-                        selectWord(row, col, "vertical");
+                  return GestureDetector(
+                    onTap: () {
+                      if (prev_row != -1 && prev_column != -1) {
+                        if (row == prev_row) {
+                          selectWord(row, col, "horizontal");
+                        } else if (col == prev_column) {
+                          selectWord(row, col, "vertical");
+                        } else {
+                          prev_column = -1;
+                          prev_row = -1;
+                          resetSelection();
+                        }
                       } else {
-                        prev_column = -1;
-                        prev_row = -1;
+                        prev_column = col;
+                        prev_row = row;
                         resetSelection();
                       }
-                    } else {
-                      prev_column = col;
-                      prev_row = row;
-                      resetSelection();
-                    }
-                    //selectWord(row, col, "horizontal"); // Change to "vertical" for vertical selection
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.blue),
-                      color: cellSelected[row][col] ? Colors.red : Colors.white,
-                      borderRadius: BorderRadius.circular(5.0),
-                    ),
-                    child: Center(
-                      child: Text(
-                        puzzleGrid[row][col],
-                        style: TextStyle(
-                          fontSize: 20.0,
-                          color: cellSelected[row][col]
-                              ? Colors.white
-                              : Colors.black,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      //selectWord(row, col, "horizontal"); // Change to "vertical" for vertical selection
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.blue),
+                        color:
+                            cellSelected[row][col] ? Colors.red : Colors.white,
+                        borderRadius: BorderRadius.circular(5.0),
                       ),
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
-          SizedBox(height: 20.0),
-          Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Text(
-              'Selected Word: $selectedWord',
-              style: TextStyle(
-                fontSize: 18.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          SizedBox(height: 10.0),
-          Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Text(
-              'Correct Words Found: $count',
-              style: TextStyle(
-                fontSize: 18.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          SizedBox(height: 10.0),
-          Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Column(
-              children: [
-                Text(
-                  'ACROSS\n',
-                  style: TextStyle(
-                    fontSize: 22.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Text(
-                  '1)DNA - Genetic material that contains instructions for cellular functions (3 letters)\n'
-                  '2)Transcription - Process where DNA is converted into RNA (13 letters).\n'
-                  '3)mRNA - The type of RNA that carries the genetic code from the nucleus to the ribosomes (4 letters).\n'
-                  '4)Nucleotide - Basic unit of DNA and RNA, consisting of a sugar, a phosphate group, and a nitrogenous base (10 letters).\n'
-                  '5)Ribosome - The site of protein synthesis within a cell (8 letters).\n'
-                  '6)tRNA - The molecule involved in translation, which carries amino acids to the ribosome (4 letters).\n'
-                  '7)Template - The strand of DNA that serves as a template for RNA synthesis (8 letters).\n'
-                  '8)Translation - The process by which the genetic code is translated into a sequence of amino acids (10 letters).\n\n',
-                  style: TextStyle(
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Text(
-                  'DOWN\n',
-                  style: TextStyle(
-                    fontSize: 22.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Text(
-                  '1)Codon - The sequence of three nucleotides that codes for a specific amino acid (5 letters).\n'
-                  '2)Complement - The complementary strand of DNA that is synthesized during transcription (9 letters).\n'
-                  '3)Amino - A building block of proteins (5 letters).\n'
-                  '4)rRNA - The type of RNA that is synthesized using DNA as a template (4 letters).\n'
-                  '5)Coding - The strand of DNA that directly corresponds to the sequence of RNA produced during transcription (6 letters).\n'
-                  '6)Transcription - The process by which RNA is synthesized from DNA (11 letters).',
-                  style: TextStyle(
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          if (isTimeUp)
-              AlertDialog(
-                alignment: Alignment.center,
-              title: Text('TIME UP....'),
-              content: Text('GO TO THE HOME PAGE AND START AGAIN....'),
-              actions: <Widget>[
-              TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => FirstRoute(),
-                    ),
-                  ); // Close the dialog
-                },
-                child: Text('OK'),
-              ),
-              ],
-              ),
-          ElevatedButton(
-                        onPressed: () {
-                          if(count==3) {
-                          // Implement logic to move to the next puzzle or action
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => GuessTheImageApp(),
-                            ),
-                          );
-                          }
-                        },
-                        child: const Text(
-                          'Next',
+                      child: Center(
+                        child: Text(
+                          puzzleGrid[row][col],
                           style: TextStyle(
-                            fontSize: 18.0,
+                            fontSize: 20.0,
+                            color: cellSelected[row][col]
+                                ? Colors.white
+                                : Colors.black,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
-                      
-        ],
+                    ),
+                  );
+                },
+              ),
+            ),
+            SizedBox(height: 20.0),
+            Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Text(
+                'Selected Word: $selectedWord',
+                style: TextStyle(
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            SizedBox(height: 10.0),
+            Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Text(
+                'Correct Words Found: $count',
+                style: TextStyle(
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            SizedBox(height: 10.0),
+            Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Column(
+                children: [
+                  Text(
+                    'ACROSS\n',
+                    style: TextStyle(
+                      fontSize: 22.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    '1)DNA - Genetic material that contains instructions for cellular functions (3 letters)\n'
+                    '2)Transcription - Process where DNA is converted into RNA (13 letters).\n'
+                    '3)mRNA - The type of RNA that carries the genetic code from the nucleus to the ribosomes (4 letters).\n'
+                    '4)Nucleotide - Basic unit of DNA and RNA, consisting of a sugar, a phosphate group, and a nitrogenous base (10 letters).\n'
+                    '5)Ribosome - The site of protein synthesis within a cell (8 letters).\n'
+                    '6)tRNA - The molecule involved in translation, which carries amino acids to the ribosome (4 letters).\n'
+                    '7)Template - The strand of DNA that serves as a template for RNA synthesis (8 letters).\n'
+                    '8)Translation - The process by which the genetic code is translated into a sequence of amino acids (10 letters).\n\n',
+                    style: TextStyle(
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    'DOWN\n',
+                    style: TextStyle(
+                      fontSize: 22.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    '1)Codon - The sequence of three nucleotides that codes for a specific amino acid (5 letters).\n'
+                    '2)Complement - The complementary strand of DNA that is synthesized during transcription (9 letters).\n'
+                    '3)Amino - A building block of proteins (5 letters).\n'
+                    '4)rRNA - The type of RNA that is synthesized using DNA as a template (4 letters).\n'
+                    '5)Coding - The strand of DNA that directly corresponds to the sequence of RNA produced during transcription (6 letters).\n'
+                    '6)Transcription - The process by which RNA is synthesized from DNA (11 letters).',
+                    style: TextStyle(
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            if (isTimeUp)
+              AlertDialog(
+                alignment: Alignment.center,
+                title: Text('TIME UP....'),
+                content: Text('GO TO THE HOME PAGE AND START AGAIN....'),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => FirstRoute(),
+                        ),
+                      ); // Close the dialog
+                    },
+                    child: Text('OK'),
+                  ),
+                ],
+              ),
+            if (!isTimeUp)
+              ElevatedButton(
+                onPressed: () {
+                  if (count == 3) {
+                    // Implement logic to move to the next puzzle or action
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => GuessTheImageApp(),
+                      ),
+                    );
+                  }
+                },
+                child: const Text(
+                  'Next',
+                  style: TextStyle(
+                    fontSize: 18.0,
+                  ),
+                ),
+              ),
+          ],
+        ),
       ),
-    ),
     );
   }
 }

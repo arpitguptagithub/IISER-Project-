@@ -69,6 +69,11 @@ flutter:
     - assets/level_bgr.png
     - assets/vineet.jpg
     - assets/3danimations/animation_lmi4qgx8.json
+    - assets/img1.jpg
+    - assets/img2.jpg
+    - assets/img3.jpg
+    - assets/img4.jpg
+    - assets/img5.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
