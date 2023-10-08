@@ -34,7 +34,7 @@ class HelpSplashScreen extends StatelessWidget {
               // add the animations ot whatever you feel
 
               SizedBox(height: 16.0),
-              Lottie.asset(imagePath,width:200.0),
+              Lottie.asset(imagePath, width: 200.0),
 
               Text(
                 text,
@@ -45,7 +45,6 @@ class HelpSplashScreen extends StatelessWidget {
                 ),
               ),
 
-             
               ElevatedButton(
                 onPressed: () {
                   if (levelName == 1) {
@@ -76,14 +75,13 @@ class HelpSplashScreen extends StatelessWidget {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => MatchingApp()));
                   }
+                  // if (levelName == 6) {
+                  //   Navigator.push(context,
+                  //       MaterialPageRoute(builder: (context) => FinalLevel()));
+                  // }
                   if (levelName == 6) {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => FinalLevel()));
-                  }
-                  if(levelName == 7){
-                    Navigator.push(
-                  context, 
-                  MaterialPageRoute(builder: (context) => FirstRoute()));
+                        MaterialPageRoute(builder: (context) => FirstRoute()));
                   }
                   // Implement logic to move to the next puzzle or action
                 },

@@ -94,7 +94,7 @@ class _DNAPairingPageState extends State<DNAPairingPage> {
         row2Controllers[i].clear();
       }
     }
-    print(countFinal);
+    // print(countFinal);
     if (countFinal == 8) {
       DisplayLevelComplete();
       NextButton = true;
@@ -102,12 +102,15 @@ class _DNAPairingPageState extends State<DNAPairingPage> {
   }
 
   void DisplayLevelComplete() {
-     Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => HelpSplashScreen(text: "Match the following", imagePath: "assets/3danimations/correct_ans.json", levelName: 4),
-                              ),
-                            );
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => HelpSplashScreen(
+            text: "RNA Pairing",
+            imagePath: "assets/3danimations/correct_ans.json",
+            levelName: 4),
+      ),
+    );
   }
 
   @override

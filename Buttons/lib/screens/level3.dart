@@ -33,7 +33,7 @@ class RNAPairingPage extends StatefulWidget {
 }
 
 class _RNAPairingPageState extends State<RNAPairingPage> {
-  var Letters = ['A', 'T', 'G', 'A', 'A', 'A', 'C', 'G', 'A', 'T', 'G', 'A'];
+  var Letters = ['T', 'A', 'C', 'T', 'T', 'T', 'G', 'C', 'T', 'A', 'C', 'T'];
 
   int timerSeconds = 60; // Set your desired countdown time here
   late Timer timer;
@@ -75,7 +75,7 @@ class _RNAPairingPageState extends State<RNAPairingPage> {
 
   void checkAndClearIfIncorrect() {
     int countFinal = 0;
-    Map<String, String> RNA_Bases = {'A': 'T', 'T': 'A', 'G': 'C', 'C': 'G'};
+    Map<String, String> RNA_Bases = {'T': 'A', 'A': 'U', 'C': 'G', 'G': 'C'};
     // List<String> RNA_bases = ['A', 'G', 'T', 'C'];
     for (int i = 0; i < row1Controllers.length; i++) {
       final String char1 = Letters[i];

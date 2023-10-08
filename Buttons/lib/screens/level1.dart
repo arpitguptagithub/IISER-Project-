@@ -12,7 +12,6 @@ class CrosswordApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.blue,
       ),
-      
       home: Scaffold(
         body: SafeArea(
           child: CrosswordGrid(),
@@ -28,7 +27,7 @@ class CrosswordGrid extends StatefulWidget {
 }
 
 class _CrosswordGridState extends State<CrosswordGrid> {
-  int timerSeconds = 300; // Set your desired countdown time here
+  int timerSeconds = 600; // Set your desired countdown time here
   late Timer timer;
   bool isTimeUp = false;
 
@@ -134,7 +133,7 @@ class _CrosswordGridState extends State<CrosswordGrid> {
   }
 
   bool checkForWordMatch() {
-    if (selectedWord == "DNA" && checkWord["TRANSCRIPTION"] == false) {
+    if (selectedWord == "DNA" && checkWord["DNA"] == false) {
       checkWord["DNA"] = true;
       return true;
     } else if (selectedWord == "TRANSCRIPTION" &&
@@ -315,23 +314,27 @@ class _CrosswordGridState extends State<CrosswordGrid> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 100,
+                  SizedBox(
+                    height: 100,
                     child: PageView(
-                        /// [PageView.scrollDirection] defaults to [Axis.horizontal].
-                        /// Use [Axis.vertical] to scroll vertically.
-                        controller: controller,
-                        children: const <Widget>[
-                          Center(
-                            child: Text('1)Genetic material that contains instructions for cellular functions (3 letters)\n'),
-                          ),
-                          Center(
-                            child: Text('2)Process where DNA is converted into RNA (13 letters).\n'),
-                          ),
-                          Center(
-                            child: Text('3)The type of RNA that carries the genetic code from the nucleus to the ribosomes (4 letters).\n'),
-                          ),
-                        ],
-                      ),
+                      /// [PageView.scrollDirection] defaults to [Axis.horizontal].
+                      /// Use [Axis.vertical] to scroll vertically.
+                      controller: controller,
+                      children: const <Widget>[
+                        Center(
+                          child: Text(
+                              '1)Genetic material that contains instructions for cellular functions (3 letters)\n'),
+                        ),
+                        Center(
+                          child: Text(
+                              '2)Process where DNA is converted into RNA (13 letters).\n'),
+                        ),
+                        Center(
+                          child: Text(
+                              '3)The type of RNA that carries the genetic code from the nucleus to the ribosomes (4 letters).\n'),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -367,7 +370,12 @@ class _CrosswordGridState extends State<CrosswordGrid> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => HelpSplashScreen(text: "Welcome to Level 2! Your task is to unscramble the letters provided as hints for each picture. \nThese images represent fundamental tools of synthetic biology. \nUpon successful completion of Level 2, you will be sent to Level 3.\n Good luck!", imagePath: "assets/3danimations/correct_ans.json", levelName: 2),
+                              builder: (context) => HelpSplashScreen(
+                                  text:
+                                      "Welcome to Level 2! Your task is to unscramble the letters provided as hints for each picture. \nThese images represent fundamental tools of synthetic biology. \nUpon successful completion of Level 2, you will be sent to Level 3.\n Good luck!",
+                                  imagePath:
+                                      "assets/3danimations/correct_ans.json",
+                                  levelName: 2),
                             ),
                           );
                         }

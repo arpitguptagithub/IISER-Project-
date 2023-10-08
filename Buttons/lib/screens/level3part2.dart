@@ -5,7 +5,6 @@ import 'package:buttons/screens/FinalLevel.dart';
 import 'package:buttons/screens/level4.dart';
 import 'package:buttons/screens/pageofinstructions.dart';
 import 'package:flutter/material.dart';
-import '';
 
 // void main() {
 //   runApp(const MaterialApp(
@@ -60,35 +59,45 @@ class _MatchingPageState extends State<MatchingPage> {
   }
 
   Map<String, String?> matches = {
-    'UCA': null,
-    'GAC': null,
-    'UGC': null,
+    'AAA': null,
     'AUG': null,
+    'CGA': null,
+    'UUC': null,
+    'AGU': null,
+    'GAU': null,
+    'GGC': null,
+    'UGA': null,
   };
 
+  Map<String, String> temp = {
+    'Met': 'AUG',
+    'Lys': 'AAA',
+    'Arg': 'CGA',
+    'Phe': 'UUC',
+    'Ser': 'AGU',
+    'Asp': 'GAU',
+    'Gly': 'GGC',
+    'Stop': 'UGA',
+  };
   Map<String, String> targets = {
-    'SERINE': 'UCA',
-    'ASPATIC ACID': 'GAC',
-    'CYSTERINE ': 'GAC',
-    'METHIONINE': 'AUG',
+    'AUG': 'Met',
+    'AAA': 'Lys',
+    'CGA': 'Arg',
+    'UUC': 'Phe',
+    'AGU': 'Ser',
+    'GAU': 'Asp',
+    'GGC': 'Gly',
+    'UGA': 'Stop',
   };
 
   void checkMatch(String draggable, String target) {
     String? val1 = draggable;
     String val2 = target;
-    String? valOfval2 = targets[target];
 
-    bool isPartialMatch = true;
-    // for (int i = 0; i < val2.length; i++) {
-    //   if (!val1.contains(valOfval2)) {
-    //     isPartialMatch = false;
-    //     break;
-    //   }
-    // }
-
-    if (isPartialMatch) {
+    if (val2 == val1) {
+      // print('Match found: $draggable -> $target');
       setState(() {
-        matches[draggable] = target;
+        matches[draggable] = targets[target];
       });
     }
   }
@@ -120,8 +129,8 @@ class _MatchingPageState extends State<MatchingPage> {
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color.fromARGB(255, 197, 205, 213),
-              Color.fromARGB(255, 178, 174, 174)
+              Color.fromARGB(255, 48, 213, 200),
+              Color.fromARGB(255, 48, 213, 200)
             ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -129,149 +138,157 @@ class _MatchingPageState extends State<MatchingPage> {
         ), // Background color
         padding: EdgeInsets.all(20.0), // Padding for the whole container
         child: Center(
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  // Left Column
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: matches.keys.map((draggable) {
-                      return Draggable<String>(
-                        data: draggable,
-                        child: Container(
-                          width: 150,
-                          height: 60,
-                          margin: EdgeInsets.symmetric(vertical: 10.0),
-                          decoration: BoxDecoration(
-                            color:
-                                Colors.lightBlueAccent, // Box background color
-                            border: Border.all(
-                                color: Colors.black), // Box border color
-                          ),
-                          child: Center(
-                            child: Text(
-                              draggable,
-                              style: TextStyle(
-                                fontSize: 20.0, // Font size
-                                fontWeight: FontWeight.bold, // Font weight
-                                color: Colors.white, // Font color
-                              ),
-                            ),
-                          ),
-                        ),
-                        feedback: Container(
-                          width: 150,
-                          height: 60,
-                          decoration: BoxDecoration(
-                            color:
-                                Colors.lightBlueAccent, // Box background color
-                            border: Border.all(
-                                color: Colors.black), // Box border color
-                          ),
-                          child: Center(
-                            child: Text(
-                              draggable,
-                              style: TextStyle(
-                                fontSize: 20.0, // Font size
-                                fontWeight: FontWeight.bold, // Font weight
-                                color: Colors.white, // Font color
-                              ),
-                            ),
-                          ),
-                        ),
-                        childWhenDragging: Container(),
-                      );
-                    }).toList(),
-                  ),
-                  // Right Column
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: targets.keys.map((target) {
-                      return DragTarget<String>(
-                        builder: (BuildContext context,
-                            List<String?> candidateData,
-                            List<dynamic> rejectedData) {
-                          final isMatched = matches[target] != null;
-
-                          return Container(
-                            width: 150,
-                            height: 60,
-                            margin: EdgeInsets.symmetric(
-                                vertical: 10.0), // Margin between target boxes
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ListView(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    // Left Column
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: matches.keys.map((draggable) {
+                        return Draggable<String>(
+                          data: draggable,
+                          child: Container(
+                            width: 120,
+                            height: 48,
+                            margin: EdgeInsets.symmetric(vertical: 10.0),
                             decoration: BoxDecoration(
-                              color: isMatched
-                                  ? Colors.green
-                                  : Colors.white, // Box background color
-                              border: Border.all(
-                                  color: Colors.black), // Box border color
-                            ),
+                                color: Color.fromARGB(
+                                    255, 255, 200, 221), // Box background color
+                                border: Border.all(
+                                    color: Colors.black), // Box border color
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(25))),
                             child: Center(
                               child: Text(
-                                isMatched ? matches[target]! : target,
+                                draggable,
                                 style: TextStyle(
                                   fontSize: 20.0, // Font size
                                   fontWeight: FontWeight.bold, // Font weight
-                                  color: Colors.black, // Font color
+                                  color: const Color.fromARGB(
+                                      255, 0, 0, 0), // Font color
                                 ),
                               ),
                             ),
-                          );
-                        },
-                        onWillAccept: (draggable) =>
-                            matches[draggable!] == null,
-                        onAccept: (draggable) {
-                          checkMatch(draggable!, target);
-                        },
+                          ),
+                          feedback: Container(
+                            width: 120,
+                            height: 48,
+                            decoration: BoxDecoration(
+                                color: Color.fromARGB(
+                                    255, 255, 200, 221), // Box background color
+                                border: Border.all(
+                                    color: Colors.black), // Box border color
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(25))),
+                            child: Center(
+                              child: Text(
+                                draggable,
+                                style: TextStyle(
+                                  fontSize: 20.0, // Font size
+                                  fontWeight: FontWeight.bold, // Font weight
+                                  color: Colors.white, // Font color
+                                ),
+                              ),
+                            ),
+                          ),
+                          childWhenDragging: Container(),
+                        );
+                      }).toList(),
+                    ),
+                    // Right Column
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: targets.values.map((target) {
+                        return DragTarget<String>(
+                          builder: (BuildContext context,
+                              List<String?> candidateData,
+                              List<dynamic> rejectedData) {
+                            final isMatched = matches[temp[target]] != null;
+
+                            return Container(
+                              width: 120,
+                              height: 48,
+                              margin: EdgeInsets.symmetric(
+                                  vertical:
+                                      10.0), // Margin between target boxes
+                              decoration: BoxDecoration(
+                                  color: isMatched
+                                      ? Color.fromARGB(255, 10, 134, 15)
+                                      : Colors.white, // Box background color
+                                  border: Border.all(
+                                      color: Colors.black), // Box border color
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(25))),
+                              child: Center(
+                                child: Text(
+                                  isMatched ? matches[temp[target]]! : target,
+                                  style: TextStyle(
+                                    fontSize: 20.0, // Font size
+                                    fontWeight: FontWeight.bold, // Font weight
+                                    color: Colors.black, // Font color
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                          onWillAccept: (dragabble) =>
+                              matches[dragabble!] == null,
+                          onAccept: (draggable) {
+                            checkMatch(draggable, temp[target]!);
+                          },
+                        );
+                      }).toList(),
+                    ),
+                  ],
+                ),
+                if (!isTimeUp)
+                  ElevatedButton(
+                    onPressed: () {
+                      // Implement logic to move to the next puzzle or action
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => HelpSplashScreen(
+                              text: "Congratulations you completed the game😎",
+                              imagePath: "assets/3danimations/congrats.json",
+                              levelName: 6),
+                        ),
                       );
-                    }).toList(),
-                  ),
-                ],
-              ),
-              if (!isTimeUp)
-                ElevatedButton(
-                  onPressed: () {
-                    // Implement logic to move to the next puzzle or action
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => HelpSplashScreen(
-                            text: "Form a word from the given letters",
-                            imagePath: "imagePath",
-                            levelName: 5),
+                    },
+                    child: Text(
+                      'Next',
+                      style: TextStyle(
+                        fontSize: 18.0,
                       ),
-                    );
-                  },
-                  child: Text(
-                    'Next',
-                    style: TextStyle(
-                      fontSize: 18.0,
                     ),
                   ),
-                ),
-              if (isTimeUp)
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: AlertDialog(
-                    title: Text('TIME UP....'),
-                    content: Text('GO TO THE HOME PAGE AND START AGAIN....'),
-                    actions: <Widget>[
-                      TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => FirstRoute(),
-                            ),
-                          ); // Close the dialog
-                        },
-                        child: Text('OK'),
-                      ),
-                    ],
+                if (isTimeUp)
+                  Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: AlertDialog(
+                      title: Text('TIME UP....'),
+                      content: Text('GO TO THE HOME PAGE AND START AGAIN....'),
+                      actions: <Widget>[
+                        TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => FirstRoute(),
+                              ),
+                            ); // Close the dialog
+                          },
+                          child: Text('OK'),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

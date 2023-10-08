@@ -261,6 +261,7 @@ class _GuessTheImagePageState extends State<GuessTheImagePage> {
     }).toList();
 
     return Wrap(
+      alignment: WrapAlignment.center,
       spacing: 10,
       runSpacing: 5,
       children: selectedBoxWidgets,
@@ -276,6 +277,7 @@ class _GuessTheImagePageState extends State<GuessTheImagePage> {
     }).toList();
 
     return Wrap(
+      alignment: WrapAlignment.center,
       spacing: 10,
       runSpacing: 5,
       children: availableLetterWidgets,
@@ -319,8 +321,8 @@ class _GuessTheImagePageState extends State<GuessTheImagePage> {
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color.fromARGB(255, 197, 205, 213),
-              Color.fromARGB(255, 178, 174, 174)
+              Color.fromARGB(255, 48, 213, 200),
+              Color.fromARGB(255, 48, 213, 200)
             ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -366,17 +368,20 @@ class _GuessTheImagePageState extends State<GuessTheImagePage> {
                   ),
                 ),
               SizedBox(height: 16.0),
-              ElevatedButton(
-                onPressed: () {
-                  // Implement logic to move to the next puzzle or action
-                  if (isAnswerCorrect()) {
-                    widget.onNext();
-                  }
-                },
-                child: Text(
-                  'Next',
-                  style: TextStyle(
-                    fontSize: 18.0,
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton(
+                  onPressed: () {
+                    // Implement logic to move to the next puzzle or action
+                    if (isAnswerCorrect()) {
+                      widget.onNext();
+                    }
+                  },
+                  child: Text(
+                    'Next',
+                    style: TextStyle(
+                      fontSize: 18.0,
+                    ),
                   ),
                 ),
               ),
