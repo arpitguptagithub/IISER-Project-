@@ -5,6 +5,7 @@ import 'package:buttons/screens/level4.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:math';
+import 'package:buttons/screens/pageofinstructions.dart';
 
 class GuessTheImageApp extends StatelessWidget {
   @override
@@ -22,7 +23,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final int repeatCount = 4; // Set the number of repetitions
- 
 
   int currentPage = 0;
   late PageController pageController;
@@ -50,11 +50,11 @@ class _MyHomePageState extends State<MyHomePage> {
             TextButton(
               onPressed: () {
                 Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => DNAPairingApp(),
-              ),
-            );// Close the dialog
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => DNAPairingApp(),
+                  ),
+                ); // Close the dialog
               },
               child: Text('OK'),
             ),
@@ -72,71 +72,76 @@ class _MyHomePageState extends State<MyHomePage> {
         showCongratulationsDialog();
       } else {
         // Otherwise, go to the next page
-        pageController.nextPage(duration: Duration(milliseconds: 500), curve: Curves.easeInOut);
+        pageController.nextPage(
+            duration: Duration(milliseconds: 500), curve: Curves.easeInOut);
       }
     });
   }
+
   @override
   Widget build(BuildContext context) {
     final List<String> assetPaths = [
-      'assets/images/lion.jpg',
-      'assets/images/tiger.jpg',
-      'assets/images/cheetah.jpg',
-      'assets/images/leopard.jpg',
+      'assets/images/autoclave.jpg',
+      'assets/images/eppendorf centrifuge.jpg',
+      'assets/images/gel electrophoresis.jpg',
+      'assets/images/geldoc.jpg',
+      'assets/images/nanodrop.jpg',
+      'assets/images/pipette.jpg'
     ];
 
-    final List<String> wordsToGuesses = ['LION', 'TIGER', 'CHEETAH', 'LEOPARD'];
+    final List<String> wordsToGuesses = [
+      'AUTOCLAVE',
+      'EPPENDORF CENTRIFUGE',
+      'GEL ELECTROPHORESIS',
+      'GELDOC',
+      'NANODROP',
+      'PIPETTE',
+    ];
 
-    
     return MaterialApp(
       home: Scaffold(
-         body: PageView.builder(
-        controller: pageController,
-        itemCount: repeatCount * assetPaths.length,
-        itemBuilder: (context, index) {
-          final assetIndex = index % assetPaths.length;
-          final assetPath = assetPaths[assetIndex];
-          final wordsToGuess = wordsToGuesses[assetIndex];
+        body: PageView.builder(
+          controller: pageController,
+          itemCount: repeatCount * assetPaths.length,
+          itemBuilder: (context, index) {
+            final assetIndex = index % assetPaths.length;
+            final assetPath = assetPaths[assetIndex];
+            final wordsToGuess = wordsToGuesses[assetIndex];
 
-          return GuessTheImagePage(
-            wordsToGuess: wordsToGuess,
-            assetPath: assetPath,
-            isLastPage: index == (repeatCount * assetPaths.length),
-            onNext: nextPage,// update to the next level 
-          );
-        },
-      ),
+            return GuessTheImagePage(
+              wordsToGuess: wordsToGuess,
+              assetPath: assetPath,
+              isLastPage: index == (repeatCount * assetPaths.length),
+              onNext: nextPage, // update to the next level
+            );
+          },
+        ),
       ),
     );
-
-
-    
   }
 }
 
 class GuessTheImagePage extends StatefulWidget {
   final String assetPath;
-    final bool isLastPage;
-    final String wordsToGuess;
-    final VoidCallback onNext;
+  final bool isLastPage; 
+  final String wordsToGuess;
+  final VoidCallback onNext;
 
-
-   GuessTheImagePage({
+  GuessTheImagePage({
     required this.assetPath,
     required this.isLastPage,
     required this.wordsToGuess,
     required this.onNext,
-    });
+  });
   @override
   _GuessTheImagePageState createState() => _GuessTheImagePageState();
 }
 
 class _GuessTheImagePageState extends State<GuessTheImagePage> {
-  
   late final String length;
   List<String> selectedLetters = [];
   List<String> availableLetters = [];
-    List<String> filledBoxes =[];
+  List<String> filledBoxes = [];
 
   int timerSeconds = 60; // Set your desired countdown time here
   late Timer timer;
@@ -145,12 +150,11 @@ class _GuessTheImagePageState extends State<GuessTheImagePage> {
   @override
   void initState() {
     length = widget.wordsToGuess.length.toString();
-    filledBoxes= List.filled(int.parse(length), '');
- // Move the initialization here
+    filledBoxes = List.filled(int.parse(length), '');
+    // Move the initialization here
     super.initState();
     availableLetters = generateRandomLetters(widget.wordsToGuess);
     startTimer();
-    
   }
 
   @override
@@ -207,20 +211,23 @@ class _GuessTheImagePageState extends State<GuessTheImagePage> {
           }
         });
       },
-      child: Container(
-        width: 40.0,
-        height: 40.0,
-        decoration: BoxDecoration(
-          color: Color.fromARGB(255, 243, 224, 11),
-          borderRadius: BorderRadius.circular(5.0),
-        ),
-        child: Center(
-          child: Text(
-            letter,
-            style: TextStyle(
-              fontSize: 20.0,
-              fontWeight: FontWeight.bold,
-              color: Color.fromARGB(255, 0, 0, 0),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          width: 40.0,
+          height: 40.0,
+          decoration: BoxDecoration(
+            color: Color.fromARGB(255, 243, 224, 11),
+            borderRadius: BorderRadius.circular(5.0),
+          ),
+          child: Center(
+            child: Text(
+              letter,
+              style: TextStyle(
+                fontSize: 20.0,
+                fontWeight: FontWeight.bold,
+                color: Color.fromARGB(255, 0, 0, 0),
+              ),
             ),
           ),
         ),
@@ -277,6 +284,9 @@ class _GuessTheImagePageState extends State<GuessTheImagePage> {
     return filledBoxes.join('') == widget.wordsToGuess;
   }
 
+  // int index=0;
+  // final String image = assetPaths[index];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -304,8 +314,10 @@ class _GuessTheImagePageState extends State<GuessTheImagePage> {
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color.fromARGB(255, 197, 205, 213),
-              Color.fromARGB(255, 178, 174, 174)],
+            colors: [
+              Color.fromARGB(255, 197, 205, 213),
+              Color.fromARGB(255, 178, 174, 174)
+            ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
@@ -322,8 +334,7 @@ class _GuessTheImagePageState extends State<GuessTheImagePage> {
                 decoration: BoxDecoration(
                   color: Colors.white,
                   image: DecorationImage(
-                    image: AssetImage(
-                        'assets/vineet.jpg'), // Replace with your image asset
+                    image: AssetImage(widget.assetPath), // Replace with your image asset
                     fit: BoxFit.cover,
                   ),
                   borderRadius: BorderRadius.circular(10.0),
@@ -349,7 +360,7 @@ class _GuessTheImagePageState extends State<GuessTheImagePage> {
               ElevatedButton(
                 onPressed: () {
                   // Implement logic to move to the next puzzle or action
-                  if(isAnswerCorrect()) {
+                  if (isAnswerCorrect()) {
                     widget.onNext();
                   }
                 },
@@ -361,23 +372,23 @@ class _GuessTheImagePageState extends State<GuessTheImagePage> {
                 ),
               ),
               if (isTimeUp)
-              AlertDialog(
-              title: Text('TIME UP....'),
-              content: Text('GO TO THE HOME PAGE AND START AGAIN....'),
-              actions: <Widget>[
-              TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => FirstRoute(),
+                AlertDialog(
+                  title: Text('TIME UP....'),
+                  content: Text('GO TO THE HOME PAGE AND START AGAIN....'),
+                  actions: <Widget>[
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => FirstRoute(),
+                          ),
+                        ); // Close the dialog
+                      },
+                      child: Text('OK'),
                     ),
-                  ); // Close the dialog
-                },
-                child: Text('OK'),
-              ),
-              ],
-              ),
+                  ],
+                ),
             ],
           ),
         ),

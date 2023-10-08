@@ -58,7 +58,7 @@ class _MatchingPageState extends State<MatchingPage> {
   }
 
   Map<String, String?> matches = {
-    'A': null,
+    'AgsUOXVf': null,
     'B': null,
     'C': null,
     'D': null,
@@ -67,7 +67,7 @@ class _MatchingPageState extends State<MatchingPage> {
 
   Map<String, String> targets = {
     'A': 'Apple',
-    'B': 'Banana',
+    'Bhghjsdf': 'Banana',
     'C': 'Cat',
     'E': 'ElevatedButton',
     'D': 'Dog',
@@ -117,96 +117,105 @@ class _MatchingPageState extends State<MatchingPage> {
         ), // Background color
         padding: EdgeInsets.all(20.0), // Padding for the whole container
         child: Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+          child: Column(
             children: [
-              // Left Column
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: matches.keys.map((draggable) {
-                  return Draggable<String>(
-                    data: draggable,
-                    child: Container(
-                      width: 40,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        color: Colors.lightBlueAccent, // Box background color
-                        border:
-                            Border.all(color: Colors.black), // Box border color
-                      ),
-                      child: Center(
-                        child: Text(
-                          draggable,
-                          style: TextStyle(
-                            fontSize: 20.0, // Font size
-                            fontWeight: FontWeight.bold, // Font weight
-                            color: Colors.white, // Font color
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  // Left Column
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: matches.keys.map((draggable) {
+                      return Draggable<String>(
+                        data: draggable,
+                        child: Container(
+                          width: 150,
+                          height: 60,
+                          margin: EdgeInsets.symmetric(vertical: 10.0),
+                          decoration: BoxDecoration(
+                            color:
+                                Colors.lightBlueAccent, // Box background color
+                            border: Border.all(
+                                color: Colors.black), // Box border color
                           ),
-                        ),
-                      ),
-                    ),
-                    feedback: Container(
-                      width: 40,
-                      height: 40,
-                      decoration: BoxDecoration(
-                        color: Colors.lightBlueAccent, // Box background color
-                        border:
-                            Border.all(color: Colors.black), // Box border color
-                      ),
-                      child: Center(
-                        child: Text(
-                          draggable,
-                          style: TextStyle(
-                            fontSize: 20.0, // Font size
-                            fontWeight: FontWeight.bold, // Font weight
-                            color: Colors.white, // Font color
-                          ),
-                        ),
-                      ),
-                    ),
-                    childWhenDragging: Container(),
-                  );
-                }).toList(),
-              ),
-              // Right Column
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: targets.keys.map((target) {
-                  return DragTarget<String>(
-                    builder: (BuildContext context, List<String?> candidateData,
-                        List<dynamic> rejectedData) {
-                      final isMatched = matches[target] != null;
-
-                      return Container(
-                        width: 150,
-                        height: 60,
-                        margin: EdgeInsets.symmetric(
-                            vertical: 10.0), // Margin between target boxes
-                        decoration: BoxDecoration(
-                          color: isMatched
-                              ? Colors.green
-                              : Colors.white, // Box background color
-                          border: Border.all(
-                              color: Colors.black), // Box border color
-                        ),
-                        child: Center(
-                          child: Text(
-                            isMatched ? matches[target]! : target,
-                            style: TextStyle(
-                              fontSize: 20.0, // Font size
-                              fontWeight: FontWeight.bold, // Font weight
-                              color: Colors.black, // Font color
+                          child: Center(
+                            child: Text(
+                              draggable,
+                              style: TextStyle(
+                                fontSize: 20.0, // Font size
+                                fontWeight: FontWeight.bold, // Font weight
+                                color: Colors.white, // Font color
+                              ),
                             ),
                           ),
                         ),
+                        feedback: Container(
+                          width: 150,
+                          height: 60,
+                          decoration: BoxDecoration(
+                            color:
+                                Colors.lightBlueAccent, // Box background color
+                            border: Border.all(
+                                color: Colors.black), // Box border color
+                          ),
+                          child: Center(
+                            child: Text(
+                              draggable,
+                              style: TextStyle(
+                                fontSize: 20.0, // Font size
+                                fontWeight: FontWeight.bold, // Font weight
+                                color: Colors.white, // Font color
+                              ),
+                            ),
+                          ),
+                        ),
+                        childWhenDragging: Container(),
                       );
-                    },
-                    onWillAccept: (draggable) => matches[draggable!] == null,
-                    onAccept: (draggable) {
-                      checkMatch(draggable!, target);
-                    },
-                  );
-                }).toList(),
+                    }).toList(),
+                  ),
+                  // Right Column
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: targets.keys.map((target) {
+                      return DragTarget<String>(
+                        builder: (BuildContext context,
+                            List<String?> candidateData,
+                            List<dynamic> rejectedData) {
+                          final isMatched = matches[target] != null;
+
+                          return Container(
+                            width: 150,
+                            height: 60,
+                            margin: EdgeInsets.symmetric(
+                                vertical: 10.0), // Margin between target boxes
+                            decoration: BoxDecoration(
+                              color: isMatched
+                                  ? Colors.green
+                                  : Colors.white, // Box background color
+                              border: Border.all(
+                                  color: Colors.black), // Box border color
+                            ),
+                            child: Center(
+                              child: Text(
+                                isMatched ? matches[target]! : target,
+                                style: TextStyle(
+                                  fontSize: 20.0, // Font size
+                                  fontWeight: FontWeight.bold, // Font weight
+                                  color: Colors.black, // Font color
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                        onWillAccept: (draggable) =>
+                            matches[draggable!] == null,
+                        onAccept: (draggable) {
+                          checkMatch(draggable!, target);
+                        },
+                      );
+                    }).toList(),
+                  ),
+                ],
               ),
               if (!isTimeUp)
                 ElevatedButton(

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:buttons/main.dart';
 import 'package:buttons/screens/level5.dart';
+import 'package:buttons/screens/pageofinstructions.dart';
 import 'package:flutter/material.dart';
 
 class CrosswordApp extends StatelessWidget {
@@ -11,6 +12,7 @@ class CrosswordApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.blue,
       ),
+      
       home: Scaffold(
         body: SafeArea(
           child: CrosswordGrid(),
@@ -191,6 +193,7 @@ class _CrosswordGridState extends State<CrosswordGrid> {
 
   @override
   Widget build(BuildContext context) {
+    final PageController controller = PageController();
     return Scaffold(
       appBar: AppBar(
         title: Padding(
@@ -312,38 +315,23 @@ class _CrosswordGridState extends State<CrosswordGrid> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Text(
-                    '1)DNA - Genetic material that contains instructions for cellular functions (3 letters)\n'
-                    '2)Transcription - Process where DNA is converted into RNA (13 letters).\n'
-                    '3)mRNA - The type of RNA that carries the genetic code from the nucleus to the ribosomes (4 letters).\n'
-                    '4)Nucleotide - Basic unit of DNA and RNA, consisting of a sugar, a phosphate group, and a nitrogenous base (10 letters).\n'
-                    '5)Ribosome - The site of protein synthesis within a cell (8 letters).\n'
-                    '6)tRNA - The molecule involved in translation, which carries amino acids to the ribosome (4 letters).\n'
-                    '7)Template - The strand of DNA that serves as a template for RNA synthesis (8 letters).\n'
-                    '8)Translation - The process by which the genetic code is translated into a sequence of amino acids (10 letters).\n\n',
-                    style: TextStyle(
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    'DOWN\n',
-                    style: TextStyle(
-                      fontSize: 22.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    '1)Codon - The sequence of three nucleotides that codes for a specific amino acid (5 letters).\n'
-                    '2)Complement - The complementary strand of DNA that is synthesized during transcription (9 letters).\n'
-                    '3)Amino - A building block of proteins (5 letters).\n'
-                    '4)rRNA - The type of RNA that is synthesized using DNA as a template (4 letters).\n'
-                    '5)Coding - The strand of DNA that directly corresponds to the sequence of RNA produced during transcription (6 letters).\n'
-                    '6)Transcription - The process by which RNA is synthesized from DNA (11 letters).',
-                    style: TextStyle(
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  SizedBox(height: 100,
+                    child: PageView(
+                        /// [PageView.scrollDirection] defaults to [Axis.horizontal].
+                        /// Use [Axis.vertical] to scroll vertically.
+                        controller: controller,
+                        children: const <Widget>[
+                          Center(
+                            child: Text('1)Genetic material that contains instructions for cellular functions (3 letters)\n'),
+                          ),
+                          Center(
+                            child: Text('2)Process where DNA is converted into RNA (13 letters).\n'),
+                          ),
+                          Center(
+                            child: Text('3)The type of RNA that carries the genetic code from the nucleus to the ribosomes (4 letters).\n'),
+                          ),
+                        ],
+                      ),
                   ),
                 ],
               ),
@@ -368,24 +356,32 @@ class _CrosswordGridState extends State<CrosswordGrid> {
                 ],
               ),
             if (!isTimeUp)
-              ElevatedButton(
-                onPressed: () {
-                  if (count == 3) {
-                    // Implement logic to move to the next puzzle or action
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => GuessTheImageApp(),
+              Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        if (count == 3) {
+                          // Implement logic to move to the next puzzle or action
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => GuessTheImageApp(),
+                            ),
+                          );
+                        }
+                      },
+                      child: const Text(
+                        'Next',
+                        style: TextStyle(
+                          fontSize: 18.0,
+                        ),
                       ),
-                    );
-                  }
-                },
-                child: const Text(
-                  'Next',
-                  style: TextStyle(
-                    fontSize: 18.0,
+                    ),
                   ),
-                ),
+                  SizedBox(height: 10)
+                ],
               ),
           ],
         ),
