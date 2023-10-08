@@ -2,6 +2,7 @@ import 'package:buttons/main.dart';
 import 'package:buttons/screens/level1.dart';
 import 'package:buttons/screens/level3.dart';
 import 'package:buttons/screens/level5.dart';
+import 'package:buttons/screens/pageofinstructions.dart';
 import 'package:crossword/crossword.dart';
 import 'package:lottie/lottie.dart';
 
@@ -242,7 +243,7 @@ class _DNAPairingPageState extends State<DNAPairingPage> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => MatchingApp(),
+                                builder: (context) => HelpSplashScreen(text: "Match the following", imagePath: "imagePath", levelName: 4),
                               ),
                             );
                           },

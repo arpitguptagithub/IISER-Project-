@@ -367,7 +367,7 @@ class _CrosswordGridState extends State<CrosswordGrid> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => GuessTheImageApp(),
+                              builder: (context) => HelpSplashScreen(text: "Guess the words from the images", imagePath: "imagePath", levelName: 2),
                             ),
                           );
                         }

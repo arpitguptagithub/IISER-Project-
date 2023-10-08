@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:buttons/main.dart';
 import 'package:buttons/screens/FinalLevel.dart';
 import 'package:buttons/screens/level4.dart';
+import 'package:buttons/screens/pageofinstructions.dart';
 import 'package:flutter/material.dart';
 
 // void main() {
@@ -224,7 +225,7 @@ class _MatchingPageState extends State<MatchingPage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => FinalLevel(),
+                        builder: (context) => HelpSplashScreen(text: "Form a word from the given letters", imagePath: "imagePath", levelName: 5),
                       ),
                     );
                   },

@@ -359,6 +359,12 @@ class _GuessTheImagePageState extends State<GuessTheImagePage> {
               SizedBox(height: 16.0),
               ElevatedButton(
                 onPressed: () {
+                  Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => HelpSplashScreen(text: "Pair the A,G,T,C of DNA", imagePath: "imagePath", levelName: 3),
+                            ),
+                          );
                   // Implement logic to move to the next puzzle or action
                   if (isAnswerCorrect()) {
                     widget.onNext();
