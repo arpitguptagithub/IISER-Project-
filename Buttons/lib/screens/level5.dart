@@ -52,7 +52,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => HelpSplashScreen(text: "Welcome to Level 3! \nIn this stage, you'll be exploring the fundamentals of DNA base pairing.\n Given a single DNA strand,\n your task is to correctly assign the matching base pairs to form the complementary strand.\n Successfully completing this level will propel you to Level 4. Good luck!", imagePath: "assets/3danimations/correct_ans.json", levelName: 3),
+                    builder: (context) => HelpSplashScreen(
+                        text:
+                            "Welcome to Level 3! \nIn this stage, you'll be exploring the fundamentals of DNA base pairing.\n Given a single DNA strand,\n your task is to correctly assign the matching base pairs to form the complementary strand.\n Successfully completing this level will propel you to Level 4. Good luck!",
+                        imagePath: "assets/3danimations/correct_ans.json",
+                        levelName: 3),
                   ),
                 ); // Close the dialog
               },
@@ -101,6 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return MaterialApp(
       home: Scaffold(
         body: PageView.builder(
+          physics: const NeverScrollableScrollPhysics(),
           controller: pageController,
           itemCount: repeatCount * assetPaths.length,
           itemBuilder: (context, index) {
@@ -123,7 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
 class GuessTheImagePage extends StatefulWidget {
   final String assetPath;
-  final bool isLastPage; 
+  final bool isLastPage;
   final String wordsToGuess;
   final VoidCallback onNext;
 
@@ -295,28 +300,28 @@ class _GuessTheImagePageState extends State<GuessTheImagePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text('Guess the Image'),
-          centerTitle: true,
-          actions: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Text(
-                textAlign: TextAlign.center,
-                'Timer: ${timerSeconds.toString().padLeft(2, '0')}',
-                style: TextStyle(fontSize: 20),
-              ),
+        title: Text('Guess the Image'),
+        centerTitle: true,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Text(
+              textAlign: TextAlign.center,
+              'Timer: ${timerSeconds.toString().padLeft(2, '0')}',
+              style: TextStyle(fontSize: 20),
             ),
-          ],
-          // leading: BackButton(onPressed: () {
-          //   Navigator.push(
-          //     context,
-          //     MaterialPageRoute(
-          //       builder: (context) => CrosswordApp(),
-          //     ),
-          //   );
-          // }
-          // )
           ),
+        ],
+        // leading: BackButton(onPressed: () {
+        //   Navigator.push(
+        //     context,
+        //     MaterialPageRoute(
+        //       builder: (context) => CrosswordApp(),
+        //     ),
+        //   );
+        // }
+        // )
+      ),
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -343,7 +348,8 @@ class _GuessTheImagePageState extends State<GuessTheImagePage> {
                     decoration: BoxDecoration(
                       color: Colors.white,
                       image: DecorationImage(
-                        image: AssetImage(widget.assetPath), // Replace with your image asset
+                        image: AssetImage(
+                            widget.assetPath), // Replace with your image asset
                         fit: BoxFit.cover,
                       ),
                       borderRadius: BorderRadius.circular(10.0),

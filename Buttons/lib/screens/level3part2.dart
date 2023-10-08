@@ -81,13 +81,13 @@ class _MatchingPageState extends State<MatchingPage> {
   };
   Map<String, String> targets = {
     'AUG': 'Met',
-    'AAA': 'Lys',
-    'CGA': 'Arg',
     'UUC': 'Phe',
-    'AGU': 'Ser',
-    'GAU': 'Asp',
+    'CGA': 'Arg',
     'GGC': 'Gly',
+    'AGU': 'Ser',
     'UGA': 'Stop',
+    'AAA': 'Lys',
+    'GAU': 'Asp',
   };
 
   void checkMatch(String draggable, String target) {

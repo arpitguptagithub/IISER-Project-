@@ -333,6 +333,46 @@ class _CrosswordGridState extends State<CrosswordGrid> {
                           child: Text(
                               '3)The type of RNA that carries the genetic code from the nucleus to the ribosomes (4 letters).\n'),
                         ),
+                        Center(
+                          child: Text(
+                              '4)Basic unit of DNA and RNA, consisting of a sugar, a phosphate group, and a nitrogenous base (10 letters).\n'),
+                        ),
+                        Center(
+                          child: Text(
+                              '5)The site of protein synthesis within a cell (8 letters).\n'),
+                        ),
+                        Center(
+                          child: Text(
+                              '6)The molecule involved in translation, which carries amino acids to the ribosome (4 letters).\n'),
+                        ),
+                        Center(
+                          child: Text(
+                              '7)The strand of DNA that serves as a template for RNA synthesis (8 letters).\n'),
+                        ),
+                        Center(
+                          child: Text(
+                              '8)The sequence of three nucleotides that codes for a specific amino acid (5 letters).\n'),
+                        ),
+                        Center(
+                          child: Text(
+                              '9)The complementary strand of DNA that is synthesized during transcription (9 letters).\n'),
+                        ),
+                        Center(
+                          child: Text(
+                              '10)A building block of proteins (5 letters).\n'),
+                        ),
+                        Center(
+                          child: Text(
+                              '11)The type of RNA that is synthesized using DNA as a template (4 letters).\n'),
+                        ),
+                        Center(
+                          child: Text(
+                              '12)The strand of DNA that directly corresponds to the sequence of RNA produced during transcription (6 letters).\n'),
+                        ),
+                        Center(
+                          child: Text(
+                              '13)The process by which RNA is synthesized from DNA (11 letters).'),
+                        ),
                       ],
                     ),
                   ),
@@ -365,7 +405,7 @@ class _CrosswordGridState extends State<CrosswordGrid> {
                     padding: const EdgeInsets.all(8.0),
                     child: ElevatedButton(
                       onPressed: () {
-                        if (count == 3) {
+                        if (count == 13) {
                           // Implement logic to move to the next puzzle or action
                           Navigator.push(
                             context,
