@@ -133,7 +133,7 @@ class _RNAPairingPageState extends State<RNAPairingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('RNA Pairing'),
+        title: const Text('Gene Jigsaw - [RNA]'),
         centerTitle: true,
         actions: [
           Padding(

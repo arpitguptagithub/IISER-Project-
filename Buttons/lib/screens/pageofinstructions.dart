@@ -37,6 +37,7 @@ class HelpSplashScreen extends StatelessWidget {
               Lottie.asset(imagePath, width: 200.0),
 
               Text(
+                textAlign: TextAlign.center,
                 text,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,

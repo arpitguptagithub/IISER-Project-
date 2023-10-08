@@ -197,7 +197,7 @@ class _CrosswordGridState extends State<CrosswordGrid> {
       appBar: AppBar(
         title: Padding(
           padding: const EdgeInsets.all(12.0),
-          child: Text('Crossword Puzzle'),
+          child: Text('Synthetic Saga'),
         ),
         centerTitle: true,
         actions: [

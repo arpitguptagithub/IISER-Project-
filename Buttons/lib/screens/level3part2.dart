@@ -106,7 +106,7 @@ class _MatchingPageState extends State<MatchingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text('Matching Game'),
+          title: Text('Genetic Blitz'),
           centerTitle: true,
           actions: [
             Padding(

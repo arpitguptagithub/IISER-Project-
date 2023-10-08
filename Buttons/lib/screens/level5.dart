@@ -300,7 +300,7 @@ class _GuessTheImagePageState extends State<GuessTheImagePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Guess the Image'),
+        title: Text('LexiPic'),
         centerTitle: true,
         actions: [
           Padding(

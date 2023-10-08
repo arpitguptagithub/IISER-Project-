@@ -117,7 +117,7 @@ class _DNAPairingPageState extends State<DNAPairingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('DNA Pairing'),
+        title: const Text('Gene Jigsaw -[DNA]'),
         centerTitle: true,
         actions: [
           Padding(
