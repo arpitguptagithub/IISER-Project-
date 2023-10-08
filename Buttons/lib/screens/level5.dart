@@ -123,7 +123,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
 class GuessTheImagePage extends StatefulWidget {
   final String assetPath;
-  final bool isLastPage; 
+  final bool isLastPage;
   final String wordsToGuess;
   final VoidCallback onNext;
 
@@ -334,7 +334,8 @@ class _GuessTheImagePageState extends State<GuessTheImagePage> {
                 decoration: BoxDecoration(
                   color: Colors.white,
                   image: DecorationImage(
-                    image: AssetImage(widget.assetPath), // Replace with your image asset
+                    image: AssetImage(
+                        widget.assetPath), // Replace with your image asset
                     fit: BoxFit.cover,
                   ),
                   borderRadius: BorderRadius.circular(10.0),
@@ -360,11 +361,14 @@ class _GuessTheImagePageState extends State<GuessTheImagePage> {
               ElevatedButton(
                 onPressed: () {
                   Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => HelpSplashScreen(text: "Pair the A,G,T,C of DNA", imagePath: "imagePath", levelName: 3),
-                            ),
-                          );
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => HelpSplashScreen(
+                          text: "Pair the A,G,T,C of DNA",
+                          imagePath: "imagePath",
+                          levelName: 3),
+                    ),
+                  );
                   // Implement logic to move to the next puzzle or action
                   if (isAnswerCorrect()) {
                     widget.onNext();

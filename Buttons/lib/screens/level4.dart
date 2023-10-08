@@ -14,6 +14,7 @@ void main() {
 }
 
 int Strands_num = 4;
+bool NextButton = false;
 
 class DNAPairingApp extends StatelessWidget {
   @override
@@ -32,6 +33,8 @@ class DNAPairingPage extends StatefulWidget {
 }
 
 class _DNAPairingPageState extends State<DNAPairingPage> {
+  var Letters = ['A', 'T', 'G', 'C', 'A', 'T', 'G', 'C'];
+
   int timerSeconds = 60; // Set your desired countdown time here
   late Timer timer;
   bool isTimeUp = false;
@@ -71,26 +74,60 @@ class _DNAPairingPageState extends State<DNAPairingPage> {
   );
 
   void checkAndClearIfIncorrect() {
+    int countFinal = 0;
     Map<String, String> DNA_Bases = {'A': 'T', 'T': 'A', 'G': 'C', 'C': 'G'};
     // List<String> DNA_bases = ['A', 'G', 'T', 'C'];
     for (int i = 0; i < row1Controllers.length; i++) {
-      final String char1 = row1Controllers[i].text.toUpperCase();
+      final String char1 = Letters[i];
       final String char2 = row2Controllers[i].text.toUpperCase();
 
       if (char1.isNotEmpty && char2.isNotEmpty && char1 != char2) {
         if (DNA_Bases.containsKey(char1) && DNA_Bases[char1] == char2) {
-          // Do Nothing
+          countFinal += 1;
         } else {
           // Clear both boxes if there's a mismatch - which will be there as joint bases can't be same - refer: google
-          row1Controllers[i].clear();
+          // row1Controllers[i].clear();
           row2Controllers[i].clear();
         }
       } else {
         // Clear both boxes if there's a mismatch - which will be there as joint bases can't be same - refer: google
-        row1Controllers[i].clear();
+        // row1Controllers[i].clear();
         row2Controllers[i].clear();
       }
     }
+    print(countFinal);
+    if (countFinal == 8) {
+      DisplayLevelComplete();
+      NextButton = true;
+    }
+  }
+
+  void DisplayLevelComplete() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Level Complete'),
+          content: Text('You have completed the level'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => HelpSplashScreen(
+                        text: "Match the following",
+                        imagePath: "imagePath",
+                        levelName: 4),
+                  ),
+                ); // Close the dialog
+              },
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -151,25 +188,19 @@ class _DNAPairingPageState extends State<DNAPairingPage> {
                               width: 40,
                               height: 40,
                               margin: const EdgeInsets.all(8),
-                              child: TextField(
-                                controller: row1Controllers[index],
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(color: Colors.black),
-                                decoration: const InputDecoration(
-                                  filled: true,
-                                  fillColor: Colors.white,
+                              decoration: BoxDecoration(
+                                color: const Color.fromARGB(255, 212, 22, 22),
+                                borderRadius: BorderRadius.circular(
+                                    10), // Rounded corners
+                              ),
+                              child: Center(
+                                child: Text(
+                                  Letters[index],
+                                  style: TextStyle(
+                                    color: Colors.white, // Text color
+                                    fontSize: 24, // Font size
+                                  ),
                                 ),
-                                onChanged: (text) {
-                                  // Convert the entered text to uppercase
-                                  text = text.toUpperCase();
-                                  row1Controllers[index].value =
-                                      row1Controllers[index].value.copyWith(
-                                            text: text,
-                                            selection: TextSelection.collapsed(
-                                                offset: text.length),
-                                          );
-                                },
-                                enableInteractiveSelection: false,
                               ),
                             ),
                           ),
@@ -180,7 +211,6 @@ class _DNAPairingPageState extends State<DNAPairingPage> {
                         size: Size(20, 400),
                         painter: MyPainter(),
                       ),
-                      // Divider(color: Colors.black),
                       // Second Row of Boxes with Reverse after 4th element
                       Expanded(
                         child: Column(
@@ -195,13 +225,16 @@ class _DNAPairingPageState extends State<DNAPairingPage> {
                                 child: TextField(
                                   controller: row2Controllers[index],
                                   textAlign: TextAlign.center,
-                                  style: const TextStyle(color: Colors.black),
+                                  style: const TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.bold),
                                   decoration: const InputDecoration(
                                     filled: true,
                                     fillColor: Colors.white,
                                   ),
                                   onChanged: (text) {
-                                    // Convert the entered text to urppercase
+                                    // Convert the entered text to uppercase
                                     text = text.toUpperCase();
                                     row2Controllers[index].value =
                                         row2Controllers[index].value.copyWith(
@@ -220,11 +253,12 @@ class _DNAPairingPageState extends State<DNAPairingPage> {
                       ),
                     ],
                   ),
-                  // Buttons (check pair and next)
+// Buttons (check pair and next)
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const SizedBox(width: 16), // Add spacing between buttons
+                      SizedBox(width: 16), // Add spacing between buttons
                       ElevatedButton(
                         onPressed: () {
                           checkAndClearIfIncorrect(); // Checking the pairs
@@ -236,24 +270,29 @@ class _DNAPairingPageState extends State<DNAPairingPage> {
                           ),
                         ),
                       ),
-                      if (!isTimeUp)
-                        ElevatedButton(
-                          onPressed: () {
-                            // Implement logic to move to the next puzzle or action
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => HelpSplashScreen(text: "Match the following", imagePath: "imagePath", levelName: 4),
-                              ),
-                            );
-                          },
-                          child: const Text(
-                            'Next',
-                            style: TextStyle(
-                              fontSize: 18.0,
-                            ),
-                          ),
-                        ),
+                      // SizedBox(width: 16), // Add spacing between buttons
+
+                      // if (!isTimeUp)
+                      //   ElevatedButton(
+                      //     onPressed: () {
+                      //       // Implement logic to move to the next puzzle or action
+                      //       Navigator.push(
+                      //         context,
+                      //         MaterialPageRoute(
+                      //           builder: (context) => HelpSplashScreen(
+                      //               text: "Match the following",
+                      //               imagePath: "imagePath",
+                      //               levelName: 4),
+                      //         ),
+                      //       );
+                      //     },
+                      //     child: const Text(
+                      //       'Next',
+                      //       style: TextStyle(
+                      //         fontSize: 18.0,
+                      //       ),
+                      //     ),
+                      //   ),
                     ],
                   ),
                   if (isTimeUp)

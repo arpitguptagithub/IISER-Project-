@@ -4,14 +4,15 @@ import 'package:buttons/screens/level4.dart';
 import 'package:buttons/screens/level5.dart';
 import 'package:flutter/material.dart';
 import 'package:buttons/screens/level1.dart';
-class HelpSplashScreen extends StatelessWidget {
+import 'package:buttons/screens/level3part2.dart';
 
+class HelpSplashScreen extends StatelessWidget {
   final String text;
   final String imagePath;
   final int levelName;
-  final  LW = {
-                    "Crossword" : CrosswordApp(),
-                  };
+  final LW = {
+    "Crossword": CrosswordApp(),
+  };
   HelpSplashScreen({
     required this.text,
     required this.imagePath,
@@ -27,8 +28,7 @@ class HelpSplashScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-    
-              // add the animations ot whatever you feel 
+              // add the animations ot whatever you feel
               Text(
                 text,
                 style: TextStyle(
@@ -37,47 +37,47 @@ class HelpSplashScreen extends StatelessWidget {
                   color: Colors.white,
                 ),
               ),
-    
-              
+
               SizedBox(height: 16.0),
               Image.asset(
                 imagePath,
-                width: 200.0, 
+                width: 200.0,
               ),
               ElevatedButton(
                 onPressed: () {
-                  if(levelName == 1){
+                  if (levelName == 1) {
                     Navigator.push(
-                  context, 
-                  MaterialPageRoute(builder: (context) => CrosswordApp())
-                );
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => CrosswordApp()));
                   }
-                  if(levelName == 2){
+                  if (levelName == 2) {
                     Navigator.push(
-                  context, 
-                  MaterialPageRoute(builder: (context) => GuessTheImageApp())
-                );
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => GuessTheImageApp()));
                   }
-                  if(levelName == 3){
+                  if (levelName == 3) {
                     Navigator.push(
-                  context, 
-                  MaterialPageRoute(builder: (context) => DNAPairingApp())
-                );
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => DNAPairingApp()));
                   }
-                  if(levelName == 4){
+                  if (levelName == 4) {
                     Navigator.push(
-                  context, 
-                  MaterialPageRoute(builder: (context) => MatchingApp())
-                );
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => RNAPairingApp()));
                   }
-                  if(levelName == 5){
-                    Navigator.push(
-                  context, 
-                  MaterialPageRoute(builder: (context) => FinalLevel())
-                );
+                  if (levelName == 6) {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => MatchingApp()));
                   }
-                    // Implement logic to move to the next puzzle or action
-                
+                  if (levelName == 5) {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => FinalLevel()));
+                  }
+                  // Implement logic to move to the next puzzle or action
                 },
                 child: const Text(
                   'Next',

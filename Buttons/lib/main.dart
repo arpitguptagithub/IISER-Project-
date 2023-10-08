@@ -9,9 +9,6 @@ import 'package:buttons/screens/level4.dart';
 import 'package:buttons/screens/level5.dart';
 import 'package:buttons/screens/FinalLevel.dart';
 
-
-
-
 // import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -28,7 +25,6 @@ class FirstRoute extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       // appBar: AppBar(
       //   title: const Text('First Route'),
@@ -55,7 +51,7 @@ class FirstRoute extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => HelpSplashScreen(text: "Find all word", imagePath: "images", levelName: 1),
+                        builder: (context) => CrosswordApp(),
                       ),
                     );
                   },
