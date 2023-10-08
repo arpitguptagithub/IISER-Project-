@@ -50,8 +50,8 @@ class FirstRoute extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) => CrosswordApp(),
+                       MaterialPageRoute(
+                        builder: (context) => HelpSplashScreen(text: "Find all word", imagePath: "assets/3danimations/correct_ans.json", levelName: 1),
                       ),
                     );
                   },

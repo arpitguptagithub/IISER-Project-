@@ -14,7 +14,6 @@ void main() {
 }
 
 int Strands_num = 4;
-bool NextButton = false;
 
 class DNAPairingApp extends StatelessWidget {
   @override
@@ -103,31 +102,12 @@ class _DNAPairingPageState extends State<DNAPairingPage> {
   }
 
   void DisplayLevelComplete() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Level Complete'),
-          content: Text('You have completed the level'),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => HelpSplashScreen(
-                        text: "Match the following",
-                        imagePath: "imagePath",
-                        levelName: 4),
-                  ),
-                ); // Close the dialog
-              },
-              child: Text('OK'),
-            ),
-          ],
-        );
-      },
-    );
+     Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => HelpSplashScreen(text: "Match the following", imagePath: "assets/3danimations/correct_ans.json", levelName: 4),
+                              ),
+                            );
   }
 
   @override
@@ -146,15 +126,15 @@ class _DNAPairingPageState extends State<DNAPairingPage> {
             ),
           ),
         ],
-        leading: BackButton(onPressed: () {
-          // Handle back button press
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => GuessTheImageApp(),
-            ),
-          );
-        }),
+        // leading: BackButton(onPressed: () {
+        //   // Handle back button press
+        //   Navigator.push(
+        //     context,
+        //     MaterialPageRoute(
+        //       builder: (context) => GuessTheImageApp(),
+        //     ),
+        //   );
+        // }),
       ),
       body: Container(
         decoration: const BoxDecoration(

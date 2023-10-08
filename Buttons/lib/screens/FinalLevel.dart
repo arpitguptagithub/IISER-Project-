@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:buttons/screens/pageofinstructions.dart';
 import 'dart:math';
 
 
@@ -191,6 +192,7 @@ class _LastStageState extends State<LastStage> {
             ElevatedButton(
               onPressed: () {
                 // Implement logic to move to the next puzzle or action
+                HelpSplashScreen(text: "Congratulations", imagePath: "assets/3danimations/congrats.json", levelName: 6);
               },
               child: Text(
                 'Next',

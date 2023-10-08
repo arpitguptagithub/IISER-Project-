@@ -1,9 +1,12 @@
+import 'package:buttons/main.dart';
 import 'package:buttons/screens/FinalLevel.dart';
 import 'package:buttons/screens/level3.dart';
 import 'package:buttons/screens/level4.dart';
 import 'package:buttons/screens/level5.dart';
 import 'package:flutter/material.dart';
 import 'package:buttons/screens/level1.dart';
+import 'package:buttons/screens/level3part2.dart';
+import 'package:lottie/lottie.dart';
 import 'package:buttons/screens/level3part2.dart';
 
 class HelpSplashScreen extends StatelessWidget {
@@ -29,6 +32,10 @@ class HelpSplashScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               // add the animations ot whatever you feel
+
+              SizedBox(height: 16.0),
+              Lottie.asset(imagePath,width:200.0),
+
               Text(
                 text,
                 style: TextStyle(
@@ -38,11 +45,7 @@ class HelpSplashScreen extends StatelessWidget {
                 ),
               ),
 
-              SizedBox(height: 16.0),
-              Image.asset(
-                imagePath,
-                width: 200.0,
-              ),
+             
               ElevatedButton(
                 onPressed: () {
                   if (levelName == 1) {
@@ -69,13 +72,18 @@ class HelpSplashScreen extends StatelessWidget {
                         MaterialPageRoute(
                             builder: (context) => RNAPairingApp()));
                   }
-                  if (levelName == 6) {
+                  if (levelName == 5) {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => MatchingApp()));
                   }
-                  if (levelName == 5) {
+                  if (levelName == 6) {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => FinalLevel()));
+                  }
+                  if(levelName == 7){
+                    Navigator.push(
+                  context, 
+                  MaterialPageRoute(builder: (context) => FirstRoute()));
                   }
                   // Implement logic to move to the next puzzle or action
                 },

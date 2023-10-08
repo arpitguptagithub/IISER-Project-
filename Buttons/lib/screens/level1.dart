@@ -211,15 +211,15 @@ class _CrosswordGridState extends State<CrosswordGrid> {
             ),
           ),
         ],
-        leading: BackButton(onPressed: () {
-          // Handle back button press
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => FirstRoute(),
-            ),
-          );
-        }),
+        // leading: BackButton(onPressed: () {
+        //   // Handle back button press
+        //   Navigator.push(
+        //     context,
+        //     MaterialPageRoute(
+        //       builder: (context) => FirstRoute(),
+        //     ),
+        //   );
+        // }),
       ),
       body: Center(
         child: ListView(
@@ -309,7 +309,7 @@ class _CrosswordGridState extends State<CrosswordGrid> {
               child: Column(
                 children: [
                   Text(
-                    'ACROSS\n',
+                    'HINTS\n',
                     style: TextStyle(
                       fontSize: 22.0,
                       fontWeight: FontWeight.bold,
@@ -367,7 +367,7 @@ class _CrosswordGridState extends State<CrosswordGrid> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => HelpSplashScreen(text: "Guess the words from the images", imagePath: "imagePath", levelName: 2),
+                              builder: (context) => HelpSplashScreen(text: "Welcome to Level 2! Your task is to unscramble the letters provided as hints for each picture. \nThese images represent fundamental tools of synthetic biology. \nUpon successful completion of Level 2, you will be sent to Level 3.\n Good luck!", imagePath: "assets/3danimations/correct_ans.json", levelName: 2),
                             ),
                           );
                         }

@@ -52,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => DNAPairingApp(),
+                    builder: (context) => HelpSplashScreen(text: "Welcome to Level 3! \nIn this stage, you'll be exploring the fundamentals of DNA base pairing.\n Given a single DNA strand,\n your task is to correctly assign the matching base pairs to form the complementary strand.\n Successfully completing this level will propel you to Level 4. Good luck!", imagePath: "assets/3danimations/correct_ans.json", levelName: 3),
                   ),
                 ); // Close the dialog
               },
@@ -123,7 +123,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
 class GuessTheImagePage extends StatefulWidget {
   final String assetPath;
-  final bool isLastPage;
+  final bool isLastPage; 
   final String wordsToGuess;
   final VoidCallback onNext;
 
@@ -260,8 +260,9 @@ class _GuessTheImagePageState extends State<GuessTheImagePage> {
       );
     }).toList();
 
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return Wrap(
+      spacing: 10,
+      runSpacing: 5,
       children: selectedBoxWidgets,
     );
   }
@@ -274,8 +275,9 @@ class _GuessTheImagePageState extends State<GuessTheImagePage> {
       );
     }).toList();
 
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return Wrap(
+      spacing: 10,
+      runSpacing: 5,
       children: availableLetterWidgets,
     );
   }
@@ -303,14 +305,16 @@ class _GuessTheImagePageState extends State<GuessTheImagePage> {
               ),
             ),
           ],
-          leading: BackButton(onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => CrosswordApp(),
-              ),
-            );
-          })),
+          // leading: BackButton(onPressed: () {
+          //   Navigator.push(
+          //     context,
+          //     MaterialPageRoute(
+          //       builder: (context) => CrosswordApp(),
+          //     ),
+          //   );
+          // }
+          // )
+          ),
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -323,23 +327,27 @@ class _GuessTheImagePageState extends State<GuessTheImagePage> {
           ),
         ),
         child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+          child: ListView(
+            // mainAxisAlignment: MainAxisAlignment.center,
+            scrollDirection: Axis.vertical,
             children: [
               // Image Here
-              Container(
-                margin: EdgeInsets.all(16.0),
-                width: 200.0,
-                height: 200.0,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  image: DecorationImage(
-                    image: AssetImage(
-                        widget.assetPath), // Replace with your image asset
-                    fit: BoxFit.cover,
+              Column(
+                children: [
+                  Container(
+                    margin: EdgeInsets.all(16.0),
+                    width: 200.0,
+                    height: 200.0,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      image: DecorationImage(
+                        image: AssetImage(widget.assetPath), // Replace with your image asset
+                        fit: BoxFit.cover,
+                      ),
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
                   ),
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
+                ],
               ),
               SizedBox(height: 16.0),
               // Empty boxes for guessing
@@ -360,15 +368,6 @@ class _GuessTheImagePageState extends State<GuessTheImagePage> {
               SizedBox(height: 16.0),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => HelpSplashScreen(
-                          text: "Pair the A,G,T,C of DNA",
-                          imagePath: "imagePath",
-                          levelName: 3),
-                    ),
-                  );
                   // Implement logic to move to the next puzzle or action
                   if (isAnswerCorrect()) {
                     widget.onNext();

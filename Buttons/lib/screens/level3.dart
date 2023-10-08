@@ -116,8 +116,8 @@ class _RNAPairingPageState extends State<RNAPairingPage> {
                   MaterialPageRoute(
                     builder: (context) => HelpSplashScreen(
                         text: "Match the following",
-                        imagePath: "imagePath",
-                        levelName: 6),
+                        imagePath: "assets/3danimations/correct_ans.json",
+                        levelName: 5),
                   ),
                 ); // Close the dialog
               },

@@ -74,6 +74,8 @@ flutter:
     - assets/images/geldoc.jpg
     - assets/images/nanodrop.jpg
     - assets/images/pipette.jpg
+    - assets/3danimations/correct_ans.json
+    - assets/3danimations/congrats.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
