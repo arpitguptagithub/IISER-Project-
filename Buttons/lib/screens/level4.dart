@@ -111,18 +111,20 @@ class _DNAPairingPageState extends State<DNAPairingPage> {
         leading: BackButton(onPressed: () {
           // Handle back button press
           Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => GuessTheImageApp(),
-              ),
-            );
+            context,
+            MaterialPageRoute(
+              builder: (context) => GuessTheImageApp(),
+            ),
+          );
         }),
       ),
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color.fromARGB(255, 197, 205, 213),
-              Color.fromARGB(255, 178, 174, 174)],
+            colors: [
+              Color.fromARGB(255, 197, 205, 213),
+              Color.fromARGB(255, 178, 174, 174)
+            ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
@@ -134,9 +136,9 @@ class _DNAPairingPageState extends State<DNAPairingPage> {
               Column(
                 children: [
                   Lottie.asset('assets/3danimations/animation_lmi4qgx8.json'),
-                      SizedBox(
-                        height: 20,
-                      ),
+                  SizedBox(
+                    height: 20,
+                  ),
                   Row(
                     children: [
                       // First Row of Boxes
@@ -203,8 +205,9 @@ class _DNAPairingPageState extends State<DNAPairingPage> {
                                     row2Controllers[index].value =
                                         row2Controllers[index].value.copyWith(
                                               text: text,
-                                              selection: TextSelection.collapsed(
-                                                  offset: text.length),
+                                              selection:
+                                                  TextSelection.collapsed(
+                                                      offset: text.length),
                                             );
                                   },
                                   enableInteractiveSelection: false,
@@ -252,23 +255,23 @@ class _DNAPairingPageState extends State<DNAPairingPage> {
                     ],
                   ),
                   if (isTimeUp)
-                  AlertDialog(
-                  title: Text('TIME UP....'),
-                  content: Text('GO TO THE HOME PAGE AND START AGAIN....'),
-                  actions: <Widget>[
-                  TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => FirstRoute(),
+                    AlertDialog(
+                      title: Text('TIME UP....'),
+                      content: Text('GO TO THE HOME PAGE AND START AGAIN....'),
+                      actions: <Widget>[
+                        TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => FirstRoute(),
+                              ),
+                            ); // Close the dialog
+                          },
+                          child: Text('OK'),
                         ),
-                      ); // Close the dialog
-                    },
-                    child: Text('OK'),
-                  ),
-                  ],
-                  ),
+                      ],
+                    ),
                 ],
               ),
             ],
@@ -324,3 +327,5 @@ class MyPainter extends CustomPainter {
     return false;
   }
 }
+
+// Row Fill Remain
