@@ -226,7 +226,7 @@ class _RNAPairingPageState extends State<RNAPairingPage> {
                                   textAlign: TextAlign.center,
                                   style: const TextStyle(
                                       color: Colors.black,
-                                      fontSize: 24,
+                                      fontSize: 18,
                                       fontWeight: FontWeight.bold),
                                   decoration: const InputDecoration(
                                     filled: true,
