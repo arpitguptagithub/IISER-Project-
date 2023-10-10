@@ -1,6 +1,6 @@
 import 'dart:io';
+import 'package:just_audio_background/just_audio_background.dart';
 import 'package:lottie/lottie.dart';
-import 'package:buttons/screens/level2.dart';
 import 'package:flutter/material.dart';
 import 'package:buttons/screens/pageofinstructions.dart';
 import 'package:buttons/screens/level1.dart';
@@ -10,7 +10,14 @@ import 'package:buttons/screens/level5.dart';
 import 'package:buttons/screens/FinalLevel.dart';
 // import 'package:flutter_native_splash/flutter_native_splash.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await JustAudioBackground.init(
+    androidNotificationChannelId: 'com.example.buttons',
+    androidNotificationChannelName: 'Buttons',
+    androidNotificationOngoing: true,
+  );
+
   runApp(const MaterialApp(
     debugShowCheckedModeBanner: false,
     title: 'Synbio Spark',
@@ -96,10 +103,10 @@ class _SplashScreen1State extends State<SplashScreen1>
               Text(
                 'Synbio Spark',
                 style: TextStyle(
-                  fontSize: 28,
+                  fontSize: 35,
+                  fontFamily: 'Roboto',
                   fontWeight: FontWeight.bold,
-                  color: const Color.fromARGB(255, 226, 15,
-                      15), // Change text color to contrast with the background
+                  color: Colors.blueAccent, // Change text color to contrast with the background
                 ),
               ),
             ],
@@ -331,13 +338,3 @@ class ThirdRoute extends StatelessWidget {
   }
 }
 
-class FourthRoute extends StatelessWidget {
-  const FourthRoute({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: LevelTwo(),
-    );
-  }
-}

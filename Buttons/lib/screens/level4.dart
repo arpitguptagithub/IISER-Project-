@@ -1,19 +1,15 @@
 import 'package:buttons/main.dart';
-import 'package:buttons/screens/level1.dart';
 import 'package:buttons/screens/level3.dart';
-import 'package:buttons/screens/level5.dart';
 import 'package:buttons/screens/pageofinstructions.dart';
-import 'package:crossword/crossword.dart';
 import 'package:lottie/lottie.dart';
+import 'package:just_audio/just_audio.dart';
+import 'package:just_audio_background/just_audio_background.dart';
 
 import 'dart:async';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(DNAPairingApp());
-}
-
 int Strands_num = 4;
+ late AudioPlayer player ;
 
 class DNAPairingApp extends StatelessWidget {
   @override
@@ -40,12 +36,16 @@ class _DNAPairingPageState extends State<DNAPairingPage> {
 
   @override
   void initState() {
+    
+  player = AudioPlayer();
+   loadBackgroundMusic();
     startTimer();
   }
 
   @override
   void dispose() {
     timer.cancel();
+    player.dispose();
     super.dispose();
   }
 
@@ -61,6 +61,32 @@ class _DNAPairingPageState extends State<DNAPairingPage> {
       });
     });
   }
+
+  
+Future<void> loadBackgroundMusic() async {
+try {
+    final audioSource = AudioSource.asset(
+      'assets/Sounds/background.mp3',
+      tag: MediaItem(
+        id: 'background_music',
+        title: 'Background Music',
+      ),
+    );
+
+    // Load the audio source
+    await player.setAudioSource(audioSource);
+
+    // Set loop mode and volume
+    await player.setLoopMode(LoopMode.one);
+    await player.setVolume(1.0);
+
+    // Start playing
+    await player.play();
+  } catch (e) {
+    print('Error playing audio: $e');
+  }
+}
+
 
   List<TextEditingController> row1Controllers = List.generate(
     2 * Strands_num,

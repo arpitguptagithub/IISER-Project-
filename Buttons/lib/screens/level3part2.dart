@@ -1,18 +1,11 @@
 import 'dart:async';
-
+import 'package:just_audio/just_audio.dart';
+import 'package:just_audio_background/just_audio_background.dart';
 import 'package:buttons/main.dart';
-import 'package:buttons/screens/FinalLevel.dart';
 import 'package:buttons/screens/level4.dart';
 import 'package:buttons/screens/pageofinstructions.dart';
 import 'package:flutter/material.dart';
 
-// void main() {
-//   runApp(const MaterialApp(
-//     debugShowCheckedModeBanner: false,
-//     title: 'Navigation Basics',
-//     home: MaterialApp(),
-//   ));
-// }
 
 class MatchingApp extends StatelessWidget {
   @override
@@ -34,16 +27,44 @@ class _MatchingPageState extends State<MatchingPage> {
   int timerSeconds = 60; // Set your desired countdown time here
   late Timer timer;
   bool isTimeUp = false;
+   late AudioPlayer player ;
 
   void initState() {
+    player = AudioPlayer();
+    loadBackgroundMusic();
     startTimer();
   }
 
   @override
   void dispose() {
     timer.cancel();
+    player.dispose();
     super.dispose();
   }
+
+  
+Future<void> loadBackgroundMusic() async {
+  try {
+    final audioSource = AudioSource.asset(
+      'assets/Sounds/background.mp3',
+      tag: MediaItem(
+        id: 'background_music',
+        title: 'Background Music',
+      ),
+    );
+    // Load the audio source
+    await player.setAudioSource(audioSource);
+
+    // Set loop mode and volume
+    await player.setLoopMode(LoopMode.one);
+    await player.setVolume(1.0);
+
+    // Start playing
+    await player.play();
+  } catch (e) {
+    print('Error playing audio: $e');
+  }
+}
 
   void startTimer() {
     timer = Timer.periodic(Duration(seconds: 1), (timer) {

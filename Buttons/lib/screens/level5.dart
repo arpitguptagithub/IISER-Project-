@@ -1,10 +1,9 @@
 import 'package:buttons/main.dart';
-import 'package:buttons/screens/level1.dart';
-import 'package:buttons/screens/level3.dart';
-import 'package:buttons/screens/level4.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:math';
+import 'package:just_audio/just_audio.dart';
+import 'package:just_audio_background/just_audio_background.dart';
 import 'package:buttons/screens/pageofinstructions.dart';
 
 class GuessTheImageApp extends StatelessWidget {
@@ -15,6 +14,8 @@ class GuessTheImageApp extends StatelessWidget {
     );
   }
 }
+
+late AudioPlayer player;
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -30,13 +31,43 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
+    player = AudioPlayer();
+    loadBackgroundMusic();
     pageController = PageController();
   }
 
   @override
   void dispose() {
     pageController.dispose();
+    player.dispose();
     super.dispose();
+  }
+
+  Future<void> loadBackgroundMusic() async {
+
+  try {
+    final audioSource = AudioSource.asset(
+      'assets/Sounds/background.mp3',
+      tag: MediaItem(
+        id: 'background_music',
+        title: 'Background Music',
+      ),
+    );
+
+
+
+      // Load the audio source
+      await player.setAudioSource(audioSource);
+
+      // Set loop mode and volume
+      await player.setLoopMode(LoopMode.one);
+      await player.setVolume(1.0);
+
+      // Start playing
+      await player.play();
+    } catch (e) {
+      print('Error playing audio: $e');
+    }
   }
 
   void showCongratulationsDialog() {

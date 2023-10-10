@@ -1,9 +1,9 @@
 import 'dart:async';
-
 import 'package:buttons/main.dart';
-import 'package:buttons/screens/level5.dart';
 import 'package:buttons/screens/pageofinstructions.dart';
 import 'package:flutter/material.dart';
+import 'package:just_audio/just_audio.dart';
+import 'package:just_audio_background/just_audio_background.dart';
 
 class CrosswordApp extends StatelessWidget {
   @override
@@ -80,10 +80,14 @@ class _CrosswordGridState extends State<CrosswordGrid> {
   String selectedWord = "";
   int prev_row = -1;
   int prev_column = -1;
+  //fix
+  late AudioPlayer player ;
 
   @override
   void initState() {
     startTimer();
+    player = AudioPlayer();
+   loadBackgroundMusic();
     super.initState();
     for (var row in puzzleGrid) {
       cellSelected.add(List.generate(row.length, (index) => false));
@@ -92,6 +96,7 @@ class _CrosswordGridState extends State<CrosswordGrid> {
 
   void dispose() {
     timer.cancel();
+    player.dispose();
     super.dispose();
   }
 
@@ -107,6 +112,32 @@ class _CrosswordGridState extends State<CrosswordGrid> {
       });
     });
   }
+  
+ //keep volume full
+
+Future<void> loadBackgroundMusic() async {
+  try {
+    final audioSource = AudioSource.asset(
+      'assets/Sounds/background.mp3',
+      tag: MediaItem(
+        id: 'background_music',
+        title: 'Background Music',
+      ),
+    );
+    // Load the audio source
+    await player.setAudioSource(audioSource);
+
+    // Set loop mode and volume
+    await player.setLoopMode(LoopMode.one);
+    await player.setVolume(1.0);
+
+    // Start playing
+    await player.play();
+  } catch (e) {
+    print('Error playing audio: $e');
+  }
+}
+
 
   void selectWord(int row, int col, String direction) {
     String word = "";
@@ -200,25 +231,6 @@ class _CrosswordGridState extends State<CrosswordGrid> {
           child: Text('Synthetic Saga'),
         ),
         centerTitle: true,
-        // actions: [
-        //   Padding(
-        //     padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        //     child: Text(
-        //       textAlign: TextAlign.center,
-        //       'Timer: ${timerSeconds.toString().padLeft(2, '0')}',
-        //       style: const TextStyle(fontSize: 20),
-        //     ),
-        //   ),
-        // ],
-        // leading: BackButton(onPressed: () {
-        //   // Handle back button press
-        //   Navigator.push(
-        //     context,
-        //     MaterialPageRoute(
-        //       builder: (context) => FirstRoute(),
-        //     ),
-        //   );
-        // }),
       ),
       body: Center(
         child: ListView(
@@ -254,7 +266,7 @@ class _CrosswordGridState extends State<CrosswordGrid> {
                         prev_row = row;
                         resetSelection();
                       }
-                      //selectWord(row, col, "horizontal"); // Change to "vertical" for vertical selection
+                     
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -317,8 +329,7 @@ class _CrosswordGridState extends State<CrosswordGrid> {
                   SizedBox(
                     height: 100,
                     child: PageView(
-                      /// [PageView.scrollDirection] defaults to [Axis.horizontal].
-                      /// Use [Axis.vertical] to scroll vertically.
+                  
                       controller: controller,
                       children: const <Widget>[
                         Center(

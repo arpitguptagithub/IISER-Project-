@@ -1,5 +1,4 @@
 import 'package:buttons/main.dart';
-import 'package:buttons/screens/FinalLevel.dart';
 import 'package:buttons/screens/level3.dart';
 import 'package:buttons/screens/level4.dart';
 import 'package:buttons/screens/level5.dart';
@@ -7,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:buttons/screens/level1.dart';
 import 'package:buttons/screens/level3part2.dart';
 import 'package:lottie/lottie.dart';
-import 'package:buttons/screens/level3part2.dart';
+
 
 class HelpSplashScreen extends StatelessWidget {
   final String text;
@@ -35,17 +34,17 @@ class HelpSplashScreen extends StatelessWidget {
 
               SizedBox(height: 16.0),
               Lottie.asset(imagePath, width: 200.0),
-
+              SizedBox(height: 16.0),
               Text(
                 textAlign: TextAlign.center,
                 text,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 20.0,
+                  fontSize: 25.0,
                   color: Colors.white,
                 ),
               ),
-
+               SizedBox(height: 20.0),
               ElevatedButton(
                 onPressed: () {
                   if (levelName == 1) {
@@ -86,6 +85,7 @@ class HelpSplashScreen extends StatelessWidget {
                   }
                   // Implement logic to move to the next puzzle or action
                 },
+               
                 child: const Text(
                   'Next',
                   style: TextStyle(
