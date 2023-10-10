@@ -76,6 +76,9 @@ flutter:
     - assets/images/pipette.jpg
     - assets/3danimations/correct_ans.json
     - assets/3danimations/congrats.json
+    - assets/3danimations/start_right.json
+    - assets/3danimations/start_left.json
+    - assets/IIT.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
