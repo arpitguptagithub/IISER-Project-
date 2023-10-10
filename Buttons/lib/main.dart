@@ -18,20 +18,93 @@ void main() {
   ));
 }
 
-class SplashScreen1 extends StatelessWidget {
-  const SplashScreen1({Key? key});
+class SplashScreen1 extends StatefulWidget {
+  const SplashScreen1({Key? key}) : super(key: key);
+
+  @override
+  _SplashScreen1State createState() => _SplashScreen1State();
+}
+
+class _SplashScreen1State extends State<SplashScreen1>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _animation;
+
+  @override
+  void initState() {
+    super.initState();
+    // Initialize the animation controller and animation
+    _controller = AnimationController(
+      duration: const Duration(seconds: 2),
+      vsync: this,
+    );
+    _animation = CurvedAnimation(
+      parent: _controller,
+      curve: Curves.easeOut,
+    );
+    // Start the animation
+    _controller.forward();
+    // Add a listener to navigate to the first page when the animation ends
+    _controller.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        Navigator.of(context).pushReplacement(MaterialPageRoute(
+          builder: (context) => FirstRoute(),
+        ));
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    // Dispose the animation controller when not needed
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    // Add a delay before navigating to the first page
-    Future.delayed(Duration(seconds: 2), () {
-      Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (context) => FirstRoute(),
-      ));
-    });
-
     return Scaffold(
-      body: Center(
-        child: Image.asset('assets/start_screen.png'), // Display your logo
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color.fromRGBO(195, 65, 186, 1), // Changed from blue to orange
+              Colors.yellow // Changed from purple to pink
+            ], // You can adjust the gradient colors
+          ),
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // Use an AnimatedBuilder to animate the logo
+              AnimatedBuilder(
+                animation: _animation,
+                builder: (context, child) {
+                  return Transform.translate(
+                    offset: Offset(0, -_animation.value * 100),
+                    child: child,
+                  );
+                },
+                child: Image.asset('assets/start_screen.png',
+                    width: 200, height: 200), // Your blue logo
+              ),
+              SizedBox(
+                  height: 20), // Add some spacing between the logo and text
+              Text(
+                'Synbio Spark',
+                style: TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                  color: const Color.fromARGB(255, 226, 15,
+                      15), // Change text color to contrast with the background
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
