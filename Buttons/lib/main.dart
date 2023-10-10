@@ -8,13 +8,33 @@ import 'package:buttons/screens/level3.dart';
 import 'package:buttons/screens/level4.dart';
 import 'package:buttons/screens/level5.dart';
 import 'package:buttons/screens/FinalLevel.dart';
+// import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 void main() {
   runApp(const MaterialApp(
     debugShowCheckedModeBanner: false,
-    title: 'Pairing Game',
-    home: FirstRoute(),
+    title: 'Synbio Spark',
+    home: SplashScreen1(),
   ));
+}
+
+class SplashScreen1 extends StatelessWidget {
+  const SplashScreen1({Key? key});
+  @override
+  Widget build(BuildContext context) {
+    // Add a delay before navigating to the first page
+    Future.delayed(Duration(seconds: 2), () {
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (context) => FirstRoute(),
+      ));
+    });
+
+    return Scaffold(
+      body: Center(
+        child: Image.asset('assets/start_screen.png'), // Display your logo
+      ),
+    );
+  }
 }
 
 class FirstRoute extends StatelessWidget {
@@ -25,7 +45,7 @@ class FirstRoute extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Pairing Game',
+          'Synbio Spark',
           style: TextStyle(
             fontSize: 24, // Adjust the font size
             fontWeight: FontWeight.bold, // Bold text
@@ -75,7 +95,7 @@ class FirstRoute extends StatelessWidget {
                     width: 100.0,
                     height: 100.0,
                     child: Image.asset(
-                        "assets/II.png"), // Replace with your image asset
+                        "assets/IISER.png"), // Replace with your image asset
                   ),
                 ],
               ),

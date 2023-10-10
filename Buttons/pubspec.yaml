@@ -28,6 +28,8 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  flutter_native_splash: ^2.3.3
+  # flutter_native_splash: ^1.1.0
   flutter:
     sdk: flutter
 
@@ -39,6 +41,7 @@ dependencies:
   lottie: ^2.6.0
 
 dev_dependencies:
+  # flutter_native_splash: ^0.1.4
   flutter_test:
     sdk: flutter
 
@@ -79,6 +82,8 @@ flutter:
     - assets/3danimations/start_right.json
     - assets/3danimations/start_left.json
     - assets/IIT.png
+    - assets/IISER.png
+    - assets/start_screen.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
