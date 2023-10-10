@@ -193,8 +193,8 @@ class FirstRoute extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) => HelpSplashScreen(
-                        text: "Find all word",
-                        imagePath: "assets/3danimations/correct_ans.json",
+                        text: "LEVEL 1\nYou will be given a crossword to solve.\nThere are a total of 13 words which you should find.\nCorresponding hints are given below and can be accessed by swiping horizontally.\nWords can be selected only in top-to-down and left-to-right order.\nDouble tap to select a letter block. Then click the end letter of the word.\nTo unselect a word, tap randomly somwhere on the grid.",
+                        imagePath: "assets/3danimations/animation_lnkbd5dl.json",
                         levelName: 1,
                       ),
                     ),

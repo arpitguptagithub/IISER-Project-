@@ -84,6 +84,7 @@ flutter:
     - assets/IIT.png
     - assets/IISER.png
     - assets/start_screen.png
+    - assets/3danimations/animation_lnkbd5dl.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
