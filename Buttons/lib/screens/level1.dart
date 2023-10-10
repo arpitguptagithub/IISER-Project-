@@ -27,7 +27,7 @@ class CrosswordGrid extends StatefulWidget {
 }
 
 class _CrosswordGridState extends State<CrosswordGrid> {
-  int timerSeconds = 600; // Set your desired countdown time here
+  int timerSeconds = 999999999; // Set your desired countdown time here
   late Timer timer;
   bool isTimeUp = false;
 
@@ -200,16 +200,16 @@ class _CrosswordGridState extends State<CrosswordGrid> {
           child: Text('Synthetic Saga'),
         ),
         centerTitle: true,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Text(
-              textAlign: TextAlign.center,
-              'Timer: ${timerSeconds.toString().padLeft(2, '0')}',
-              style: const TextStyle(fontSize: 20),
-            ),
-          ),
-        ],
+        // actions: [
+        //   Padding(
+        //     padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        //     child: Text(
+        //       textAlign: TextAlign.center,
+        //       'Timer: ${timerSeconds.toString().padLeft(2, '0')}',
+        //       style: const TextStyle(fontSize: 20),
+        //     ),
+        //   ),
+        // ],
         // leading: BackButton(onPressed: () {
         //   // Handle back button press
         //   Navigator.push(
