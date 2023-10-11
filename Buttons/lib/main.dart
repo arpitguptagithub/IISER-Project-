@@ -104,7 +104,6 @@ class _SplashScreen1State extends State<SplashScreen1>
                 'Synbio Spark',
                 style: TextStyle(
                   fontSize: 35,
-                  fontFamily: 'Roboto',
                   fontWeight: FontWeight.bold,
                   color: Colors.blueAccent, // Change text color to contrast with the background
                 ),
