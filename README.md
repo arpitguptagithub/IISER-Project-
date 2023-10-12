@@ -60,7 +60,7 @@ Feel free to contribute to the project, report issues, or provide feedback. Enjo
 
 # Deployed Link:
 
-link: [synbios-spark-github-io.vercel.app](https://synbios-spark-github-io.vercel.app/)
+Link: [synbios-spark-github-io.vercel.app](https://synbios-spark-github-io.vercel.app/)
 
 # Video: 
 
