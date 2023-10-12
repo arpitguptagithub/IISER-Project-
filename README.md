@@ -56,7 +56,7 @@ Have fun playing "Synbio Spark" and test your skills in the world of synthetic b
 
 **Contributions**
 
-Feel free to contribute to the project, report issues, or provide feedback. Enjoy the game, and have fun exploring the world of synthetic biology!
+Feel free to contribute to the project, report issues, or provide feedback. Enjoy the game, and have fun!
 
 # Video: 
 
