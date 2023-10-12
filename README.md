@@ -1,47 +1,66 @@
-# IISER-Project-Game-"Synbio Spark"
+## Synbio Spark
 
-# This is a repository for the project done in IIT Tirupati for IISER Tirupati. The project is game developed on flutter framework.
+Welcome to the "Synbio Spark" repository, a project developed at IIT Tirupati for IISER Tirupati. This repository hosts a game built using the Flutter framework.
 
-# Collaborators:
+**Collaborators:**
 
-# 1. Preet
+* Preet
+* Aniket
+* Ajinkya
+* Manas
+* Pardhiv
+* Arpit
 
-# 2. Aniket
+**How to Run the Game:**
 
-# 3. Ajinkya
+To play the game, follow these simple steps:
 
-# 4. Manas
+1. **Download the Repository:**
 
-# 5. Pardhiv
+Download the repository as a zip file or use the following git command if you have Git installed:
 
-# 6. Arpit
+```bash
+git clone https://github.com/your-username/Synbio-Spark.git
+```
 
-# How to run the game:
+2. **Extract the Zip File:**
 
-# 1. Download the zip file of the repository.
+If you downloaded the zip file, extract its contents to a directory of your choice.
 
-# 2. Extract the zip file.
+3. **Open the Project in VS Code:**
 
-# 3. Open the folder in VS Code.
+Navigate to the project folder and open it in Visual Studio Code (VS Code) or your preferred code editor.
 
-# 4. Open the terminal and type "flutter run" to run the game.
+4. **Run the Game:**
 
-# 5. The game will run on the emulator or the device connected to the system.
+Open the terminal in your code editor and enter the following command:
 
-# 6. Enjoy the game.
+bash
+flutter run
 
-# ```
 
-# Levels of the game:
+This command will start the game, and it will run on the emulator or the device connected to your system.
 
-# 1. Level 1: The player has to solve the puzzle to move to the next level.
+5. **Enjoy the Game!**
 
-# 2. Level 2: The player has to guess the picture from the given letters.
+Have fun playing "Synbio Spark" and test your skills in the world of synthetic biology!
 
-# 3. Level 3: The player has to Fill the columns for DNA and RNA.
+**Game Levels:**
 
-# 4. Level 4: The player has to match the codons
+* **Level 1: Puzzle Solving:** In this level, players must solve puzzles to progress to the next stage of the game.
+* **Level 2: Picture Guessing:** Challenge your visual skills by guessing the picture based on provided letters.
+* **Level 3: DNA and RNA:** This level involves filling columns for DNA and RNA sequences, testing your biological knowledge.
+* **Level 4: Codon Matching:** In the final level, players must match codons, putting their genetic understanding to the test.
 
-# ```diff
+**⚠️ Note:** "Synbio Spark" is an ongoing project, and work is still in progress. Some features may be under development, and the game may not be fully complete. We appreciate your understanding and contributions to make it better.
 
-# - Note: The game is still under development. The game is not complete yet.
+**Contributions**
+
+Feel free to contribute to the project, report issues, or provide feedback. Enjoy the game, and have fun exploring the world of synthetic biology!
+
+# Video: 
+
+
+https://github.com/arpitguptagithub/IISER-Project-/assets/99756067/feea9e6a-4494-4ff1-b162-646696e54ef9
+
+
