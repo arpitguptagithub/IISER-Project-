@@ -58,6 +58,10 @@ Have fun playing "Synbio Spark" and test your skills in the world of synthetic b
 
 Feel free to contribute to the project, report issues, or provide feedback. Enjoy the game, and have fun!
 
+# Deployed Link:
+
+link: [synbios-spark-github-io.vercel.app](https://synbios-spark-github-io.vercel.app/)
+
 # Video: 
 
 
