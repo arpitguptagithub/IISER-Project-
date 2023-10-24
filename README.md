@@ -54,6 +54,22 @@ Have fun playing "Synbio Spark" and test your skills in the world of synthetic b
 
 **⚠️ Note:** "Synbio Spark" is an ongoing project, and work is still in progress. Some features may be under development. We appreciate your understanding and contributions to make it better.
 
+**App Snapshots**
+
+<img src="https://github.com/arpitguptagithub/IISER-Project-/assets/94790267/a640213c-9ae9-4985-9d5b-ea4592212cbd" width="150">
+<img src="https://github.com/arpitguptagithub/IISER-Project-/assets/94790267/bd207963-d0a4-4596-9e73-42d4c08b7323" width="150">
+<img src="https://github.com/arpitguptagithub/IISER-Project-/assets/94790267/44f64b08-a0d2-4c0d-a046-8d22bd93bf6f" width="150">
+<img src="https://github.com/arpitguptagithub/IISER-Project-/assets/94790267/0c023561-954a-468f-a389-855027fe4f71" width="150">
+<img src="https://github.com/arpitguptagithub/IISER-Project-/assets/94790267/8092ffd9-db3d-4085-b138-8fd4287f6069" width="150">
+<img src="https://github.com/arpitguptagithub/IISER-Project-/assets/94790267/ea1100d9-fd1c-468c-9a24-889af48dabba" width="150">
+<img src="https://github.com/arpitguptagithub/IISER-Project-/assets/94790267/5b2a70d7-6511-4bd9-b475-50774cbc2291" width="150">
+<img src="https://github.com/arpitguptagithub/IISER-Project-/assets/94790267/c12fda58-5b0b-498d-972b-5eda25d4dca6" width="150">
+<img src="https://github.com/arpitguptagithub/IISER-Project-/assets/94790267/7d0d5f45-5e6c-4453-967d-35511fc60a03" width="150">
+<img src="https://github.com/arpitguptagithub/IISER-Project-/assets/94790267/969c90b7-a9a1-4f18-ac9e-af45478b0a27" width="150">
+<img src="https://github.com/arpitguptagithub/IISER-Project-/assets/94790267/cf26fbf9-d949-4c43-91a5-8c64ccc65190" width="150">
+<img src="https://github.com/arpitguptagithub/IISER-Project-/assets/94790267/2bb9149f-a798-4dbe-8012-6c952e021247" width="150">
+<img src="https://github.com/arpitguptagithub/IISER-Project-/assets/94790267/9ad07d01-91c3-4ae3-a99f-f0a9672eb75e" width="150">
+
 **Contributions**
 
 Feel free to contribute to the project, report issues, or provide feedback. Enjoy the game, and have fun!
