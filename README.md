@@ -52,8 +52,6 @@ Have fun playing "Synbio Spark" and test your skills in the world of synthetic b
 * **Level 3: DNA and RNA:** This level involves filling columns for DNA and RNA sequences, testing your biological knowledge.
 * **Level 4: Codon Matching:** In the final level, players must match codons, putting their genetic understanding to the test.
 
-**⚠️ Note:** "Synbio Spark" is an ongoing project, and work is still in progress. Some features may be under development. We appreciate your understanding and contributions to make it better.
-
 **App Snapshots**
 
 <img src="https://github.com/arpitguptagithub/IISER-Project-/assets/94790267/a640213c-9ae9-4985-9d5b-ea4592212cbd" width="150">
